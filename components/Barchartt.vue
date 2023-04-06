@@ -20,7 +20,7 @@ import {
   LinearScale,
 } from "chart.js";
 import { Colors } from "chart.js";
-import all_data from "@/assets/AllData.json";
+import all_data from "@/assets/one_year.json";
 import { useWeatherStore } from "@/stores/WeatherStore";
 
 const store = useWeatherStore();
