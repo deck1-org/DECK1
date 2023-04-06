@@ -28,10 +28,6 @@
   </div>
 </template>
 <script>
-
-import Hours from '@/assets/one_year.json'
-import HoursRow from '../components/HoursRow.vue';
-
 export default {
     setup() {
         return { hours: Hours };
