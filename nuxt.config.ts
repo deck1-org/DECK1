@@ -12,5 +12,8 @@ export default {
             },
           },
         },
-    }
+    },
+    modules: [
+      '@pinia/nuxt',
+    ],
 }
