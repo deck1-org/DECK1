@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import all_data from "@/assets/one_year.json";
+import all_data from "@/assets/failure.json";
 
 export const useBaseStore = defineStore("BaseStore", {
   state: () => {
