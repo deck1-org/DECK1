@@ -28,6 +28,9 @@
   </div>
 </template>
 <script>
+
+import Hours from '@/components/HoursRow.vue'
+
 export default {
     setup() {
         return { hours: Hours };

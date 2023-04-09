@@ -9,7 +9,7 @@ const data = {
   labels,
   datasets: [
     {
-      label: "My first ass",
+      label: "Bars",
       backgroundColor: "#444444",
       borderColor: "#333333",
       data: [1, 10, 5, 3, 20, 30, 40],
