@@ -1,6 +1,6 @@
 <template>
-    <div class="DefaultLayout">
-        <Nav />
-        <slot />
-    </div>
+  <div class="flex flex-row h-screen">
+    <Sidebar />
+    <slot />
+  </div>
 </template>

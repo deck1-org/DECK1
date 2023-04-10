@@ -11,5 +11,5 @@ export const useWeatherStore = defineStore("WeatherStore", {
   },
 });
 
-// config limits - should be assigned to assets
+// config limits should be assigned to each asset
 // functions should be stored in relevent component
