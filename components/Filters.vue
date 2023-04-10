@@ -1,3 +1,3 @@
 <template>
-  <div class="bg-blue w-full">Recommendation</div>
+  <div class="bg-blue w-full">Filters</div>
 </template>
