@@ -1,7 +1,3 @@
-import { useWeatherStore } from "@/stores/WeatherStore";
-
-const store = useWeatherStore().weatherData;
-
 // ARRAYS TO DISPLAY
 let current_day = 0;
 
@@ -14,7 +10,7 @@ let [ctv_small, ctv_big, sov, site, heli]: number[][] = Array.from(
   () => Array.from({ length: 12 }, () => 0)
 );
 
-// CONFIG LIMITS               move this to assetStores !!! 
+// CONFIG LIMITS               move this to assetStores !!!
 const conf_ctv_small_limit: number = 1.5; // m
 const conf_ctv_big_limit: number = 1.75; // m
 const conf_sov_limit: number = 2.75; // m
@@ -22,7 +18,7 @@ const conf_site_limit: number = 18; // m/s
 const conf_heli_visibility_limit: number = 5; // km
 const conf_heli_cloudbase_limit: number = 1; // 0 ==> no fly | 1 ==> good to go (fly?)
 
-// CONFIG THRESHOLDS - percentage of a day that can be no-fly                move this to assetStores !!! 
+// CONFIG THRESHOLDS - percentage of a day that can be no-fly                move this to assetStores !!!
 const conf_ctv_small_threshold: number = 0.5; // 75% no fly --> NO WDT | 80% no fly --> WDT
 const conf_ctv_big_threshold: number = 0.5;
 const conf_sov_threshold: number = 0.5;
@@ -56,7 +52,7 @@ function finalArrays(data_set: any[]): number[][] {
     site[i] = countValue(wdt_site[i], 0) / years;
     heli[i] = countValue(wdt_heli[i], 0) / years;
   }
-  return [ctv_small, ctv_big, sov, site, heli]
+  return [ctv_small, ctv_big, sov, site, heli];
 }
 
 export function start(

@@ -1,3 +1,3 @@
 <template>
-  <div class="bg-blue w-full">Recommendation</div>
+  <div class="w-full deck-frame-white h-full">Recommendation</div>
 </template>

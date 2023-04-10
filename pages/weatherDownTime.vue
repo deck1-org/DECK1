@@ -1,15 +1,15 @@
 <template>
-  <div class="flex flex-wrap content-start flex-start w-full h-full">
-    <div class="w-1/5 h-20 border-2 border-black">
+  <div class="w-full h-full deck-frame-grey">
+    <div class="w-1/5 h-20 p-3">
       <LocationDropdown />
     </div>
-    <div class="w-4/5 h-20 border-2 border-black">
+    <div class="w-4/5 h-20 p-3">
       <RecommendationPopUp />
     </div>
-    <div class="w-4/5 border-2 border-black">
-      <Chart />
+    <div class="w-4/5 p-3">
+      <ChartComponent />
     </div>
-    <div class="w-1/5 border-2 border-black">
+    <div class="w-1/5 p-3">
       <Filters />
     </div>
   </div>
