@@ -1,13 +1,7 @@
 <template>
-  <div class="w-1/5 bg-blue-600">
-    <span
-      class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
-      onclick="openSidebar()"
-    >
-      <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
-    </span>
+  <div class="flex">
     <div
-      class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-1/5 overflow-y-auto text-center bg-gray-900"
+      class="fixed top-0 bottom-0 p-2 overflow-y-auto text-center bg-gray-900"
     >
       <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
@@ -19,7 +13,7 @@
       </div>
 
       <div
-        class="p-2.5 mt-3 flex items-center px-4 duration-300 cursor-pointer bg-white bg-gradient-to-r from-opacity-60 to-transparent hover:bg-gradient-to-r hover:from-transparent hover:to-opacity-60"
+        class="p-2 text-white bg-transparent hover:bg-gradient-to-r hover:text-black hover:from-white hover:via-white hover:to-transparent transition duration-500 ease-in-out"
       >
         <NuxtLink to="/weatherDownTime">
           <a class="ml-2">Weather Down Time</a>
