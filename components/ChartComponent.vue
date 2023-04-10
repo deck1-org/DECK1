@@ -1,7 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import Chart from "chart.js/auto";
+import { start } from "@/utils/wdtCalculations"
+import { useWeatherStore } from "@/stores/WeatherStore";
 
-const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+const store = useWeatherStore().weatherData;
+const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 let myChart;
 
@@ -9,10 +12,34 @@ const data = {
   labels,
   datasets: [
     {
-      label: "Bars",
+      label: "CTV SMALL",
       backgroundColor: "#444444",
       borderColor: "#333333",
-      data: [1, 10, 5, 3, 20, 30, 40],
+      data: start(store, 8, 20)[0],
+    },
+    {
+      label: "CTV BIG",
+      backgroundColor: "#444444",
+      borderColor: "#333333",
+      data: start(store, 8, 20)[1],
+    },
+    {
+      label: "SOV",
+      backgroundColor: "#444444",
+      borderColor: "#333333",
+      data: start(store, 8, 20)[2],
+    },
+    {
+      label: "Site",
+      backgroundColor: "#444444",
+      borderColor: "#333333",
+      data: start(store, 8, 20)[3],
+    },
+    {
+      label: "Heli",
+      backgroundColor: "#444444",
+      borderColor: "#333333",
+      data: start(store, 8, 20)[4],
     },
   ],
 };

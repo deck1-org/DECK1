@@ -29,16 +29,14 @@
 </template>
 <script>
 
-import Hours from '@/components/HoursRow.vue'
+import { useWeatherStore } from '@/stores/WeatherStore'
 
 export default {
     setup() {
-        return { hours: Hours };
-    },
-    components: { HoursRow },
+        return { hours: useWeatherStore().weatherData };
+    }
 }
 
-console.log(Hours)
 </script>
 
 <style scoped>
