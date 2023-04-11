@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .white-gradient {
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+  }
+  .deck-sidebar {
+    background-color: #222f3e;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  }
+  .deck-frame-grey {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: #dfdfdf;
+    border-radius: 12px;
+    padding: 0.75rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  }
+  .deck-frame-white {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 0.75rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+}
