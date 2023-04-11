@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import all_data from "@/assets/one_year.json";
+import all_data from "@/assets/AllData.json";
 
 export const useWeatherStore = defineStore("WeatherStore", {
   state: () => {
@@ -21,5 +21,5 @@ export const useWeatherStore = defineStore("WeatherStore", {
   },
 });
 
-// config limits should be stored in the FilterStore
+// config limits should be stored in filterStore
 // functions should be stored in relevent component

@@ -12,7 +12,16 @@
   }
   .deck-sidebar {
     background-color: #222f3e;
+    border-radius: 12px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  }
+  .sidebar-container {
+    width: 400px;
+    position: sticky;
+    top: 0;
+  }
+  .main-content {
+    flex-grow: 1;
   }
   .deck-frame-grey {
     display: flex;
@@ -31,5 +40,15 @@
     border-radius: 12px;
     padding: 0.75rem;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+  .sidebar-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #818181;
+  }
+  .click-here {
+    color: #222f3e;
+    font-weight: 800;
   }
 }
