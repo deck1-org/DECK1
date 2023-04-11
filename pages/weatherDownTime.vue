@@ -19,8 +19,5 @@
 export default {
   layout: "default",
   name: "WeatherDownTime",
-  onMounted() {
-    console.log("onMounted");
-  },
 };
 </script>
