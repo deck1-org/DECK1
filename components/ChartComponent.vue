@@ -1,5 +1,4 @@
 <script setup>
-<script setup>
 import Chart from "chart.js/auto";
 import { start } from "@/utils/wdtCalculations";
 import { useWeatherStore } from "@/stores/WeatherStore";
