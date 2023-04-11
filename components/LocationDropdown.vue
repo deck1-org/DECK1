@@ -1,5 +1,5 @@
 <template>
-  <div class="deck-frame-white h-full justify-center">
+  <div class="deck-frame-white h-full justify-center content-center">
     <!-- <select id="location" v-model="location">
       <option v-for="(option, index) in options" :key="index" :value="option">
         {{ option }}

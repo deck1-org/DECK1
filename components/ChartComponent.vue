@@ -3,9 +3,10 @@ import Chart from "chart.js/auto";
 import { start } from "@/utils/wdtCalculations";
 import { useWeatherStore } from "@/stores/WeatherStore";
 
-const store = useWeatherStore().weatherData;
+const weatherStore = useWeatherStore();
 
-const storeData = start(store, 8, 20);
+const storeData = start(8, 20);
+
 const labels = [
   "Jan",
   "Feb",
@@ -27,34 +28,34 @@ const data = {
   labels,
   datasets: [
     {
-      label: "CTV SMALL",
-      backgroundColor: "#444444",
+      label: "CTV Small",
+      backgroundColor: "#59b266",
       borderColor: "#333333",
-      data: storeData[0],
+      data: weatherStore.ctvSmallData,
     },
     {
-      label: "CTV BIG",
-      backgroundColor: "#444444",
+      label: "CTV Large",
+      backgroundColor: "#f9ce55",
       borderColor: "#333333",
-      data: storeData[1],
+      data: weatherStore.ctvLargeData,
     },
     {
       label: "SOV",
-      backgroundColor: "#444444",
+      backgroundColor: "#fc8181",
       borderColor: "#333333",
-      data: storeData[2],
+      data: weatherStore.sovData,
     },
     {
       label: "Site",
-      backgroundColor: "#444444",
+      backgroundColor: "#718096 ",
       borderColor: "#333333",
-      data: storeData[3],
+      data: weatherStore.siteData,
     },
     {
       label: "Heli",
-      backgroundColor: "#444444",
+      backgroundColor: "#b794f4 ",
       borderColor: "#333333",
-      data: storeData[4],
+      data: weatherStore.heliData,
     },
   ],
 };

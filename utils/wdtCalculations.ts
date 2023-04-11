@@ -1,3 +1,8 @@
+import { useWeatherStore } from "@/stores/WeatherStore";
+
+const store = useWeatherStore();
+const weatherData = store.weatherData;
+
 // ARRAYS TO DISPLAY
 let current_day = 0;
 
@@ -43,7 +48,7 @@ function evaluateArray(arr: number[], threshold: number = 0.5): number {
   return zeroes / arr.length >= threshold ? 0 : 1;
 }
 
-function finalArrays(data_set: any[]): number[][] {
+function finalArrays(data_set: any[]) {
   let years = countYears(data_set);
   for (let i = 0; i < 12; i++) {
     ctv_small[i] = countValue(wdt_ctv_small[i], 0) / years;
@@ -52,18 +57,19 @@ function finalArrays(data_set: any[]): number[][] {
     site[i] = countValue(wdt_site[i], 0) / years;
     heli[i] = countValue(wdt_heli[i], 0) / years;
   }
-  return [ctv_small, ctv_big, sov, site, heli];
+
+  store.ctvLargeData = ctv_big;
+  store.ctvSmallData = ctv_small;
+  store.sovData = sov;
+  store.siteData = site;
+  store.heliData = heli;
 }
 
-export function start(
-  data_set: any[],
-  timeRangeStart: number,
-  timeRangeEnd: number
-): number[][] {
-  for (let obj of data_set) {
+export function start(timeRangeStart: number, timeRangeEnd: number) {
+  for (let obj of weatherData) {
     fillArrays(obj, timeRangeStart, timeRangeEnd);
   }
-  return finalArrays(data_set);
+  finalArrays(weatherData);
 }
 
 function fillArrays(obj: any, timeRangeStart: number, timeRangeEnd: number) {
