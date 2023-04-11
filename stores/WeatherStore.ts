@@ -1,14 +1,15 @@
 import { defineStore } from "pinia";
-import all_data from "@/assets/AllData.json";
+
+const { data: all_data } = await useFetch("@/assets/AllData.json");
 
 export const useWeatherStore = defineStore("WeatherStore", {
   state: () => {
     const weatherData = ref(all_data);
-    const ctvSmallData = ref([]);
-    const ctvLargeData = ref([]);
-    const sovData = ref([]);
-    const siteData = ref([]);
-    const heliData = ref([]);
+    const ctvSmallData = ref<Number[]>();
+    const ctvLargeData = ref<Number[]>();
+    const sovData = ref<Number[]>();
+    const siteData = ref<Number[]>();
+    const heliData = ref<Number[]>();
 
     return {
       weatherData,
@@ -21,5 +22,5 @@ export const useWeatherStore = defineStore("WeatherStore", {
   },
 });
 
-// config limits should be assigned to each asset
+// config limits should be stored in the FilterStore
 // functions should be stored in relevent component
