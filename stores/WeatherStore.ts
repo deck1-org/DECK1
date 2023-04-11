@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
-
-const { data: all_data } = await useFetch("@/assets/AllData.json");
+import all_data from "@/assets/AllData.json";
 
 export const useWeatherStore = defineStore("WeatherStore", {
   state: () => {
