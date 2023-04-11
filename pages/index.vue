@@ -1,3 +1,11 @@
+<script setup>
+definePageMeta({
+  layout: "default",
+});
+</script>
+
 <template>
-  <div class="flex flex-row-reverse">index content</div>
+  <NuxtLink to="/HoursTable">
+    <h1>Go to data</h1>
+  </NuxtLink>
 </template>

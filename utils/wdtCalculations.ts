@@ -6,6 +6,7 @@ const weatherData = store.weatherData;
 // ARRAYS TO DISPLAY
 let current_day = 0;
 
+
 let [wdt_ctv_small, wdt_ctv_big, wdt_sov, wdt_site, wdt_heli]: number[][][] =
   Array.from({ length: 5 }, () => Array.from({ length: 12 }, () => []));
 let [day_ctv_small, day_ctv_big, day_sov, day_site, day_heli]: number[][] =
@@ -48,7 +49,7 @@ function evaluateArray(arr: number[], threshold: number = 0.5): number {
   return zeroes / arr.length >= threshold ? 0 : 1;
 }
 
-function finalArrays(data_set: any[]) {
+function finalArrays(data_set: any[]): number[][] {
   let years = countYears(data_set);
   for (let i = 0; i < 12; i++) {
     ctv_small[i] = countValue(wdt_ctv_small[i], 0) / years;
