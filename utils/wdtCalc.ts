@@ -32,6 +32,11 @@ monthsSite: number[] = [], monthsHeli: number[] = []
 
 
 export function start(timeRangeStart: number, timeRangeEnd: number) {
+    monthsCtvSmall = []
+    monthsCtvBig = []
+    monthsSov = []
+    monthsSite = []
+    monthsHeli = []
     weatherData.forEach(element => {
         if (current_day === Number(element.Day)){
             if (Number(element.Hour) >= timeRangeStart 
@@ -74,6 +79,14 @@ export function start(timeRangeStart: number, timeRangeEnd: number) {
         if (Number(element.Year) != amountOfYears) amountOfYears++;
     });
 
+    for (let i=0; i < 12; i++){
+        monthsCtvSmall[i] = Math.round(monthsCtvSmall[i] / (amountOfYears+1));
+        monthsCtvBig[i] = Math.round(monthsCtvBig[i] / (amountOfYears+1));
+        monthsSov[i] = Math.round(monthsSov[i] / (amountOfYears+1));
+        monthsSite[i] = Math.round(monthsSite[i] / (amountOfYears+1));
+        monthsHeli[i] = Math.round(monthsHeli[i] / (amountOfYears+1));
+    }
+
     store.ctvLargeData = monthsCtvBig;
     store.ctvSmallData = monthsCtvSmall;
     store.sovData = monthsSov;
@@ -83,12 +96,12 @@ export function start(timeRangeStart: number, timeRangeEnd: number) {
 
 function evaluateHourDay(element: any, newDay: boolean){
     if (!newDay){
-        hoursCtvSmall.push(parseFloat(element.Hs) > conf_ctv_small_limit ? 1 : 0)
-        hoursCtvBig.push(parseFloat(element.Hs) > conf_ctv_big_limit ? 1 : 0)
-        hoursSov.push(parseFloat(element.Hs) > conf_sov_limit ? 1 : 0)
-        hoursSite.push(parseFloat(element.Windspeed) > conf_site_limit ? 1 : 0)
-        hoursHeli.push( (parseFloat(element.Visibility) < conf_heli_visibility_limit 
-                            || Number(element.VFRCloud) === conf_heli_cloudbase_limit) ? 1 : 0)
+        hoursCtvSmall.push(parseFloat(element["Significant wave height (Hs)"]) > conf_ctv_small_limit ? 1 : 0)
+        hoursCtvBig.push(parseFloat(element["Significant wave height (Hs)"]) > conf_ctv_big_limit ? 1 : 0)
+        hoursSov.push(parseFloat(element["Significant wave height (Hs)"]) > conf_sov_limit ? 1 : 0)
+        hoursSite.push(parseFloat(element["Wind speed 115m"]) > conf_site_limit ? 1 : 0)
+        hoursHeli.push( (parseFloat(element["Visibility"]) < conf_heli_visibility_limit 
+                            || Number(element["VFR cloud"]) === conf_heli_cloudbase_limit) ? 1 : 0)
     } else {
         daysCtvSmall.push(hoursCtvSmall.filter((num) => num === 1).length / hoursCtvSmall.length
         >= threshold ? 1 : 0);
@@ -114,9 +127,9 @@ function evaluateHourDay(element: any, newDay: boolean){
 
 function evaluateMonth(monthArr: number[], dayArr: number[], month: number) {
     if(monthArr[month-1] != null){
-    monthArr[month-1] += dayArr.filter((num) => num === 1).length / (amountOfYears+1); 
+    monthArr[month-1] += dayArr.filter((num) => num === 1).length
     } //amountOfYears+1 because it starts from 0
     else {
-    monthArr[month-1] = dayArr.filter((num) => num === 1).length / (amountOfYears+1); 
+    monthArr[month-1] = dayArr.filter((num) => num === 1).length
     }
 }
