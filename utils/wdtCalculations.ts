@@ -65,12 +65,12 @@ function finalArrays(data_set: any[]) {
   store.heliData = heli;
 }
 
-export function start(timeRangeStart: number, timeRangeEnd: number) {
-  for (let obj of weatherData) {
-    fillArrays(obj, timeRangeStart, timeRangeEnd);
-  }
-  finalArrays(weatherData);
-}
+// export function start(timeRangeStart: number, timeRangeEnd: number) {
+//   for (let obj of weatherData) {
+//     fillArrays(obj, timeRangeStart, timeRangeEnd);
+//   }
+//   finalArrays(weatherData);
+// }
 
 function fillArrays(obj: any, timeRangeStart: number, timeRangeEnd: number) {
   let current_hour = Number(obj["Hour"]);

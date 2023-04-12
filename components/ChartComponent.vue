@@ -1,6 +1,6 @@
 <script setup>
 import Chart from "chart.js/auto";
-import { start } from "@/utils/wdtCalculations";
+import { start } from "@/utils/wdtCalc";
 import { useWeatherStore } from "@/stores/WeatherStore";
 
 const weatherStore = useWeatherStore();
