@@ -24,15 +24,8 @@ export default {
     handleLocationChange() {
       const filterStore = useFilterStore();
       filterStore.location = this.location;
-      // update chart - tbh no need to update cuz all we have to do is to
-      filterStore.loading = true;
-      console.log(filterStore.hideRecommendation);
       filterStore.hideRecommendation = false;
-      console.log(
-        this.location,
-        filterStore.location,
-        filterStore.hideRecommendation
-      );
+      // filterStore.loading = true; setting loading vlaue to true, so we can show loading wheel instead of chart with old data
     },
   },
 };

@@ -21,7 +21,7 @@
     top: 0;
   }
   .main-content {
-    flex-grow: 1;
+    width: calc(100vw - 400px);
   }
   .deck-frame-grey {
     display: flex;
@@ -50,5 +50,8 @@
   .click-here {
     color: #222f3e;
     font-weight: 800;
+  }
+  .filter-input {
+    @apply w-20 rounded-md border-2 text-center;
   }
 }

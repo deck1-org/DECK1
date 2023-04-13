@@ -28,8 +28,6 @@ export default defineComponent({
     const hideRecommendation = computed(() => filterStore.hideRecommendation);
     const removeBackground = "bg-transparent shadow-none";
 
-    if (!hideRecommendation) console.log("odkrywamy");
-
     return {
       hideRecommendation,
       removeBackground,
