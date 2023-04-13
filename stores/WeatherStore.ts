@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import all_data from "@/assets/AllData.json";
+import all_data from "@/assets/one_year.json";
 
 export const useWeatherStore = defineStore("WeatherStore", {
   state: () => {
@@ -9,6 +9,8 @@ export const useWeatherStore = defineStore("WeatherStore", {
     const sovData = ref<Number[]>();
     const siteData = ref<Number[]>();
     const heliData = ref<Number[]>();
+    const startHour = ref<Number>(8);
+    const endHour = ref<Number>(20);
 
     return {
       weatherData,
@@ -17,6 +19,8 @@ export const useWeatherStore = defineStore("WeatherStore", {
       sovData,
       siteData,
       heliData,
+      startHour,
+      endHour
     };
   },
 });

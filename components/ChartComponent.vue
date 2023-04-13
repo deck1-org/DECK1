@@ -8,7 +8,7 @@ const weatherStore = useWeatherStore();
 let myChart;
 
 onMounted(() => {
-  start(8, 20);
+  start(Number(weatherStore.startHour), Number(weatherStore.endHour));
 
   myChart = new Chart(document.getElementById("myChart"), {
     type: "bar",

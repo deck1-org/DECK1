@@ -7,17 +7,31 @@
       <RecommendationPopUp />
     </div>
     <div class="w-4/5 p-3">
-      <ChartComponent />
+      <ChartComponent :key="chartComponentKey" :startHour="startHour" :endHour="endHour" />
     </div>
     <div class="w-1/5 p-3">
-      <Filters />
+      <Filters @buttonClick="handleButtonClick" />
     </div>
   </div>
 </template>
 
 <script>
+import { useWeatherStore } from "~/stores/WeatherStore";
 export default {
   layout: "default",
   name: "WeatherDownTime",
+  data(){
+    return {
+      chartComponentKey: false,
+      startHour: useWeatherStore().weatherData.startHour, 
+      endHour: useWeatherStore().weatherData.endHour
+    }
+  },
+  methods: {
+    handleButtonClick() {
+      // Update the value of chartComponentKey to force remount of ChartComponent
+      this.chartComponentKey = !this.chartComponentKey
+    }
+  }
 };
 </script>
