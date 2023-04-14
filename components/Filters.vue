@@ -66,8 +66,8 @@ export default {
       this.checkInput();
       if (
         !this.error &&
-        this.startHour !== store.startHour &&
-        this.endHour !== store.endHour
+        (this.startHour !== store.startHour ||
+        this.endHour !== store.endHour)
       ) {
         store.startHour = this.startHour;
         store.endHour = this.endHour;
