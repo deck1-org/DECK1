@@ -12,6 +12,9 @@
     <div class="w-1/5 p-3">
       <Filters @buttonClick="handleButtonClick" />
     </div>
+    <div class="w-4/5 p-3">
+      <AssetConfiguration />
+    </div>
   </div>
 </template>
 
