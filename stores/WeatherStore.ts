@@ -16,6 +16,7 @@ export const useWeatherStore = defineStore("WeatherStore", {
     const show2yrs = ref<boolean>(false);
     const show10yrs = ref<boolean>(false);
     const show20yrs = ref<boolean>(false);
+    const labels = ref<String[]>(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
 
     return {
       weatherData,
@@ -31,6 +32,7 @@ export const useWeatherStore = defineStore("WeatherStore", {
       show2yrs,
       show10yrs,
       show20yrs,
+      labels,
     };
   },
 });
