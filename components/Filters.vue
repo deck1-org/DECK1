@@ -1,17 +1,6 @@
 <template>
   <div class="flex w-full h-full deck-frame-white">
     <h2 class="text-lg w-full font-semibold">Filters</h2>
-
-    <div class="mt-2">
-      <label class="inline-flex items-center">
-        <input type="checkbox" class="w-6 h-6 rounded-full" v-model="show2yrs" />
-        <span class="ml-2">2</span>
-        <input type="checkbox" class="w-6 h-6 rounded-full" v-model="show10yrs" />
-        <span class="ml-2">10</span>
-        <input type="checkbox" class="w-6 h-6 rounded-full" v-model="show20yrs" />
-        <span class="ml-2">20</span>
-      </label>
-    </div>
     <div class="pt-5 w-full flex justify-between relative">
       <label for="startHour">Working hours: </label>
       <div>
@@ -78,18 +67,15 @@
 </template>
 
 <script>
-import { useWeatherStore } from "@/stores/WeatherStore";
 
 export default {
   data() {
     return {
-      startHour: ref(useWeatherStore().startHour),
-      endHour: ref(useWeatherStore().endHour),
-      startMonth: ref(useWeatherStore().startMonth),
-      endMonth: ref(useWeatherStore().endMonth),
-      show2yrs: ref(useWeatherStore().show2yrs),
-      show10yrs: ref(useWeatherStore().show10yrs),
-      show20yrs: ref(useWeatherStore().show20yrs),
+      startHour: ref(0),
+      endHour: ref(23),
+      startMonth: ref(1),
+      endMonth: ref(12),
+      years: ref(10),
       error: ref(false),
       errorMessage: ref("Enter a valid input!"),
       showTooltip: false,
@@ -97,24 +83,16 @@ export default {
   },
   methods: {
     emitButtonClick() {
-      const store = useWeatherStore();
       this.checkInput();
-      if (
-        !this.error &&
-        ((this.startHour !== store.startHour ||
-        this.endHour !== store.endHour) ||
-        (this.startMonth !== store.startMonth ||
-          this.endMonth !== store.endMonth)) ||
-        (this.show2yrs !== store.show2yrs || this.show10yrs !== store.show10yrs || this.show20yrs !== store.show20yrs)
-      ) {
-        store.startHour = this.startHour;
-        store.endHour = this.endHour;
-        store.startMonth = this.startMonth;
-        store.endMonth = this.endMonth;
-        store.show2yrs = this.show2yrs;
-        store.show10yrs = this.show10yrs;
-        store.show20yrs = this.show20yrs;
-        this.$emit("buttonClick");
+      if (!this.error) {
+        const data = {
+          startHour: this.startHour,
+          endHour: this.endHour,
+          startMonth: this.startMonth,
+          endMonth: this.endMonth,
+          years: this.years,
+        }
+        this.$emit("buttonClick", data);
       }
     },
     checkInput() {
@@ -130,7 +108,6 @@ export default {
         this.$refs.inputEndHour.value === "" ||
         this.$refs.inputStartHour.value === ""
       ) {
-        //foolproof
         this.error = true;
       } else {
         this.error = false;

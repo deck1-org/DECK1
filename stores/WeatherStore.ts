@@ -9,15 +9,8 @@ export const useWeatherStore = defineStore("WeatherStore", {
     const sovData = ref<Number[]>();
     const siteData = ref<Number[]>();
     const heliData = ref<Number[]>();
-    const startHour = ref<number>(1);
-    const endHour = ref<number>(23);
-    const startMonth = ref<number>(1);
-    const endMonth = ref<number>(12);
-    const show2yrs = ref<boolean>(false);
-    const show10yrs = ref<boolean>(false);
-    const show20yrs = ref<boolean>(false);
     const labels = ref<String[]>(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
-
+    
     return {
       weatherData,
       ctvSmallData,
@@ -25,17 +18,7 @@ export const useWeatherStore = defineStore("WeatherStore", {
       sovData,
       siteData,
       heliData,
-      startHour,
-      endHour,
-      startMonth,
-      endMonth,
-      show2yrs,
-      show10yrs,
-      show20yrs,
       labels,
     };
   },
 });
-
-// config limits should be stored in filterStore
-// functions should be stored in relevent component
