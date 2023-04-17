@@ -1,7 +1,7 @@
 import { useWeatherStore } from "@/stores/WeatherStore";
 
 const store = useWeatherStore();
-const weatherData = store.weatherData;
+const weatherData: any = store.weatherData;
 
 // CONFIG LIMITS               move this to assetStores !!!
 const conf_ctv_small_limit: number = 1.5; // m
@@ -13,10 +13,6 @@ const conf_heli_cloudbase_limit: number = 0; // 0 ==> no fly | 1 ==> good to go 
 
 // CONFIG THRESHOLDS - percentage of a day that can be no-fly                move this to assetStores !!!
 const threshold: number = 0.5;
-
-let current_day = 1;
-let current_month = 1;
-let amountOfYears = 0;
 
 //hours
 let hoursCtvSmall: Number[] = [], hoursCtvBig: Number[] = [], hoursSov: Number[] = [], 
@@ -30,14 +26,27 @@ daysSite: number[] = [], daysHeli: number[] = []
 let monthsCtvSmall: number[] = [], monthsCtvBig: number[] = [], monthsSov: number[] = [],
 monthsSite: number[] = [], monthsHeli: number[] = []
 
+let current_day = 1;
+let current_month = 1;
+let amountOfYears = 0;
 
-export function start(timeRangeStart: number, timeRangeEnd: number) {
+export function start(years: number) {
+    const timeRangeStart: number = store.startHour
+    const timeRangeEnd: number = store.endHour
+    current_day = 1;
+    current_month = 1;
+    amountOfYears = 0;
     monthsCtvSmall = []
     monthsCtvBig = []
     monthsSov = []
     monthsSite = []
     monthsHeli = []
-    weatherData.forEach(element => {
+
+    countYears()
+    console.log(amountOfYears)
+    console.log(amountOfYears - years+1)
+    weatherData.forEach((element: any) => {
+        if (element.Year >= amountOfYears-years+1) {
         if (current_day === Number(element.Day)){
             if (Number(element.Hour) >= timeRangeStart 
             && Number(element.Hour) <= timeRangeEnd){
@@ -60,11 +69,11 @@ export function start(timeRangeStart: number, timeRangeEnd: number) {
         //if month changes -> evaluate
         if (current_month != Number(element.Month) // after || is only necessary if there's only one year of data
             || (Number(element.Month)===12 && Number(element.Day)===31 && Number(element.Hour)===timeRangeEnd) ){
-            evaluateMonth(monthsCtvSmall, daysCtvSmall, current_month)
-            evaluateMonth(monthsCtvBig, daysCtvBig, current_month)
-            evaluateMonth(monthsSov, daysSov, current_month)
-            evaluateMonth(monthsSite, daysSite, current_month)
-            evaluateMonth(monthsHeli, daysHeli, current_month)
+            monthsCtvSmall = evaluateMonth(monthsCtvSmall, daysCtvSmall, current_month)
+            monthsCtvBig = evaluateMonth(monthsCtvBig, daysCtvBig, current_month)
+            monthsSov = evaluateMonth(monthsSov, daysSov, current_month)
+            monthsSite = evaluateMonth(monthsSite, daysSite, current_month)
+            monthsHeli = evaluateMonth(monthsHeli, daysHeli, current_month)
             
             //clear days arrays
             daysCtvSmall = []
@@ -74,17 +83,19 @@ export function start(timeRangeStart: number, timeRangeEnd: number) {
             daysHeli = []
             //increment current month
             current_month = Number(element.Month)
+        // }
+        // //increment amountOfYears
+        //     if (Number(element.Year) != amountOfYears) amountOfYears++;
         }
-        //increment amountOfYears
-        if (Number(element.Year) != amountOfYears) amountOfYears++;
+    }
     });
 
     for (let i=0; i < 12; i++){
-        monthsCtvSmall[i] = Math.round(monthsCtvSmall[i] / (amountOfYears+1));
-        monthsCtvBig[i] = Math.round(monthsCtvBig[i] / (amountOfYears+1));
-        monthsSov[i] = Math.round(monthsSov[i] / (amountOfYears+1));
-        monthsSite[i] = Math.round(monthsSite[i] / (amountOfYears+1));
-        monthsHeli[i] = Math.round(monthsHeli[i] / (amountOfYears+1));
+        monthsCtvSmall[i] = monthsCtvSmall[i] / years;
+        monthsCtvBig[i] = monthsCtvBig[i] / years;
+        monthsSov[i] = monthsSov[i] / years;
+        monthsSite[i] = monthsSite[i] / years;
+        monthsHeli[i] = monthsHeli[i] / years;
     }
 
     store.ctvLargeData = monthsCtvBig;
@@ -96,10 +107,10 @@ export function start(timeRangeStart: number, timeRangeEnd: number) {
 
 function evaluateHourDay(element: any, newDay: boolean){
     if (!newDay){
-        hoursCtvSmall.push(parseFloat(element["Significant wave height (Hs)"]) > conf_ctv_small_limit ? 1 : 0)
-        hoursCtvBig.push(parseFloat(element["Significant wave height (Hs)"]) > conf_ctv_big_limit ? 1 : 0)
-        hoursSov.push(parseFloat(element["Significant wave height (Hs)"]) > conf_sov_limit ? 1 : 0)
-        hoursSite.push(parseFloat(element["Wind speed 115m"]) > conf_site_limit ? 1 : 0)
+        hoursCtvSmall.push(parseFloat(element["Sign. wave height (Hs)"]) > conf_ctv_small_limit ? 1 : 0)
+        hoursCtvBig.push(parseFloat(element["Sign. wave height (Hs)"]) > conf_ctv_big_limit ? 1 : 0)
+        hoursSov.push(parseFloat(element["Sign. wave height (Hs)"]) > conf_sov_limit ? 1 : 0)
+        hoursSite.push(parseFloat(element["Wind speed"]) > conf_site_limit ? 1 : 0)
         hoursHeli.push( (parseFloat(element["Visibility"]) < conf_heli_visibility_limit 
                             || Number(element["VFR cloud"]) === conf_heli_cloudbase_limit) ? 1 : 0)
     } else {
@@ -125,11 +136,24 @@ function evaluateHourDay(element: any, newDay: boolean){
     }
 }
 
-function evaluateMonth(monthArr: number[], dayArr: number[], month: number) {
+function evaluateMonth(monthArr: number[], dayArr: number[], month: number): number[] {
+    if (month >= Number(store.startMonth) && month <= Number(store.endMonth)) {
     if(monthArr[month-1] != null){
     monthArr[month-1] += dayArr.filter((num) => num === 1).length
     } //amountOfYears+1 because it starts from 0
     else {
     monthArr[month-1] = dayArr.filter((num) => num === 1).length
+    }
+    }
+    return monthArr;
+};
+
+function countYears() {
+    let year = 0;
+    for (const item of weatherData) {
+        if(item.Year != year){
+            amountOfYears++;
+            year = item.Year;
+        }
     }
 }

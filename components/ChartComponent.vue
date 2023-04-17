@@ -8,9 +8,19 @@ const weatherStore = useWeatherStore();
 let myChart;
 
 onMounted(() => {
-  start(Number(weatherStore.startHour), Number(weatherStore.endHour));
-
-  myChart = new Chart(document.getElementById("myChart"), {
+  for (let i = 1; i < 4; i++) {
+    switch(i) {
+      case 1: 
+        start(2);
+      break;
+      case 2:
+        start(10);
+        break;
+        case 3:
+        start(20);
+        break;
+    }
+  myChart = new Chart(document.getElementsByClassName("mychart"+i), {
     type: "bar",
     data: {
       labels: [
@@ -28,6 +38,13 @@ onMounted(() => {
         "Dec",
       ],
       datasets: [
+        {
+          label: "Site",
+          data: weatherStore.siteData,
+          backgroundColor: "#718096 ",
+          borderColor: "#333333",
+          borderRadius: 10,
+        },
         {
           label: "CTV Small",
           data: weatherStore.ctvSmallData,
@@ -50,13 +67,6 @@ onMounted(() => {
           borderRadius: 10,
         },
         {
-          label: "Site",
-          data: weatherStore.siteData,
-          backgroundColor: "#718096 ",
-          borderColor: "#333333",
-          borderRadius: 10,
-        },
-        {
           label: "Heli",
           data: weatherStore.heliData,
           backgroundColor: "#b794f4 ",
@@ -73,11 +83,17 @@ onMounted(() => {
       },
     },
   });
+}
 });
 </script>
 
 <template>
   <div class="deck-frame-white">
-    <canvas id="myChart"></canvas>
+    <p v-if="useWeatherStore().show2yrs">2 years</p>
+    <canvas title="2 years" v-if="useWeatherStore().show2yrs" className="mychart1"></canvas>
+    <p v-if="useWeatherStore().show10yrs">10 years</p>
+    <canvas title="10 years" v-if="useWeatherStore().show10yrs" className="mychart2"></canvas>
+    <p v-if="useWeatherStore().show20yrs">20 years</p>
+    <canvas title="20 years" v-if="useWeatherStore().show20yrs" className="mychart3"></canvas>
   </div>
 </template>
