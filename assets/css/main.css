@@ -54,7 +54,39 @@
   .filter-input {
     @apply w-20 rounded-md border-2 text-center;
   }
-    .range-slider {
+    
+  .button-87 {
+    margin: 10px;
+    padding: 15px 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    display: block;
+    border: 0px;
+    font-weight: 500;
+    box-shadow: 0px 0px 14px -7px #f09819;
+    background-image: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-87:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .button-87:active {
+    transform: scale(0.95);
+  }
+
+  .range-slider {
     width: 350px;
     margin: auto;
     text-align: center;
@@ -98,15 +130,15 @@
   }
 
   input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #2497e3;
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
   }
 
   input[type=range]:focus::-ms-fill-lower {
-    background: #2497e3;
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
   }
 
   input[type=range]:focus::-ms-fill-upper {
-    background: #2497e3;
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
   }
 
   input[type=range]::-webkit-slider-runnable-track {
@@ -114,7 +146,7 @@
     height: 5px;
     cursor: pointer;
     animate: 0.2s;
-    background: #2497e3;
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
     border-radius: 1px;
     box-shadow: none;
     border: 0;

@@ -31,7 +31,7 @@
     <div class="pt-5 w-full flex justify-between relative">
       <label for="startMonth">Months from-to: </label>
     </div>
-    <div class="p-2 pb-8 flex w-full justify-around">
+    <div class="p-2 pb-7 flex w-full justify-around">
       <div class="range-slider">
         <span @change="slider">
           <input v-model.number="this.filterParams.startMonth" ref="inputStartMonth" type="number" min="1" max="12"/>
@@ -43,7 +43,7 @@
     </div>
       <p class="text-red-600 w-full" v-if="error">{{ errorMessage }}</p>
     <button
-      class="mx-2 my-3 p-0.5 px-3 rounded-md border-2 text-center px-2"
+      class="mx-2 my-3 p-1 px-3 rounded-md border-2 text-center px-2 button-87"
       @click="emitButtonClick"
     >
       Apply changes
