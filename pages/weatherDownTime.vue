@@ -6,20 +6,18 @@
     <div class="w-4/5 h-20 p-3">
       <RecommendationPopUp />
     </div>
-    <div>
-      <GraphFilter :chartId="chartId" />
-      <GraphFilter v-if="show2" :chartId="chartId" />
-      <GraphFilter v-if="show3" :chartId="chartId" />
+    <div class="flex flex-col">
+    <div v-for="id in ids" :key="id">
+      <GraphFilter @remove="handleRemove" :chartId="id" />
     </div>
-    <button
-    type="button"
-    class="w-4/5 inline-block border-2 rounded-full pb-4 pt-2"
-    @click="addGraph">
-    <!-- /*<IconsAdd /> --> Add more graph
-    </button>
-    <!-- <div class="w-4/5 p-3">
-        <AssetConfiguration />
-    </div> -->
+      <button
+      v-if="ids.length !== 3"
+      type="button"
+      class="w-[898px] border-2 rounded-full py-1 ml-[12px] mt-[-16px]"
+      @click="addGraph">
+      <!-- /*<IconsAdd /> --> <p class="font-semibold text-[18px] text-gray-800">Add more graph</p>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -29,20 +27,18 @@ export default {
   name: "WeatherDownTime",
   data(){
     return {
-      chartId: ref(1),
-      show2: ref(false),
-      show3: ref(false),
+      ids: [1],
+      show: ref(false),
     }
   },
   methods: {
     addGraph() {
-      this.chartId++;
-      switch (this.chartId) {
-        case 2:
-          this.show2 = true;
-          break;
-        case 3:
-          this.show3 = true;
+      this.ids.push(this.ids[this.ids.length-1]+1)
+    },
+    handleRemove(id) {
+      console.log('id: ' + id)
+      if(this.ids.length !== 1){
+      this.ids = this.ids.filter((el) => el !== id);
       }
     }
   }
