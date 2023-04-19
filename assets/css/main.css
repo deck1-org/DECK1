@@ -54,7 +54,7 @@
   .filter-input {
     @apply w-20 rounded-md border-2 text-center;
   }
-    
+
   .button-87 {
     margin: 10px;
     padding: 15px 30px;
@@ -68,20 +68,25 @@
     border: 0px;
     font-weight: 500;
     box-shadow: 0px 0px 14px -7px #f09819;
-    background-image: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
+    background-image: linear-gradient(
+      45deg,
+      #09a6d7 0%,
+      #42c2b3 51%,
+      #71d896 100%
+    );
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
   }
-  
+
   .button-87:hover {
     background-position: right center;
     /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
   }
-  
+
   .button-87:active {
     transform: scale(0.95);
   }
@@ -95,13 +100,13 @@
   }
 
   .range-slider svg,
-  .range-slider input[type=range] {
+  .range-slider input[type="range"] {
     position: absolute;
     left: 0;
     bottom: 0;
   }
 
-  input[type=number] {
+  input[type="number"] {
     border: 1px solid #ddd;
     text-align: center;
     font-size: 1em;
@@ -110,49 +115,49 @@
     /* -moz-appearance: textfield; */
   }
 
-  input[type=number]::-webkit-outer-spin-button,
-  input[type=number]::-webkit-inner-spin-button {
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
 
-  input[type=number]:invalid,
-  input[type=number]:out-of-range {
+  input[type="number"]:invalid,
+  input[type="number"]:out-of-range {
     border: 2px solid #ff6347;
   }
 
-  input[type=range] {
+  input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
   }
 
-  input[type=range]:focus {
+  input[type="range"]:focus {
     outline: none;
   }
 
-  input[type=range]:focus::-webkit-slider-runnable-track {
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
+  input[type="range"]:focus::-webkit-slider-runnable-track {
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
   }
 
-  input[type=range]:focus::-ms-fill-lower {
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
+  input[type="range"]:focus::-ms-fill-lower {
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
   }
 
-  input[type=range]:focus::-ms-fill-upper {
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
+  input[type="range"]:focus::-ms-fill-upper {
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
   }
 
-  input[type=range]::-webkit-slider-runnable-track {
+  input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
     animate: 0.2s;
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3  51%, #71D896  100%);
+    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
     border-radius: 1px;
     box-shadow: none;
     border: 0;
   }
 
-  input[type=range]::-webkit-slider-thumb {
+  input[type="range"]::-webkit-slider-thumb {
     z-index: 2;
     position: relative;
     box-shadow: 0px 0px 0px #000;
@@ -166,4 +171,32 @@
     margin-top: -7px;
   }
 
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+  }
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    z-index: 10000;
+    display: flex;
+    width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  }
+  .create-input {
+    @apply py-2 flex justify-between w-60;
+  }
+  .action-button {
+    background-color: #09a6d7;
+    color: white;
+  }
 }

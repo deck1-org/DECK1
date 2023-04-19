@@ -7,6 +7,7 @@
     </div>
 
     <SidebarItem path="/weatherDownTime" text="Weather Down Time" />
+    <SidebarItem path="/assets" text="Assets" />
   </div>
 </template>
 
