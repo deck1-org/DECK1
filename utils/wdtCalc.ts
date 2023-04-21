@@ -1,15 +1,18 @@
 import { useWeatherStore } from "@/stores/WeatherStore";
+import { useAssetStore } from "~/stores/AssetStore";
 
 const store = useWeatherStore();
+const assetStore = useAssetStore();
 const weatherData: any = store.weatherData;
 
 // CONFIG LIMITS               move this to assetStores !!!
-const conf_ctv_small_limit: number = 1.5; // m
-const conf_ctv_big_limit: number = 1.75; // m
-const conf_sov_limit: number = 2.75; // m
-const conf_site_limit: number = 18; // m/s
-const conf_heli_visibility_limit: number = 20.83; // 20.83% -> 5km 
-const conf_heli_cloudbase_limit: number = 0; // 0 ==> no fly | 1 ==> good to go (fly?)
+const conf_ctv_small_limit: number = assetStore.ctv_small.limit; 
+const conf_ctv_big_limit: number = assetStore.ctv_big.limit;  
+const conf_sov_limit: number = assetStore.sov.limit;
+const conf_heli_visibility_limit: number = assetStore.heli.visibility;
+const conf_heli_cloudbase_limit: number = assetStore.heli.cloudbase;
+
+const conf_site_limit: number = 18; /////////////////
 
 // CONFIG THRESHOLDS - percentage of a day that can be no-fly                move this to assetStores !!!
 const threshold: number = 0.5;
