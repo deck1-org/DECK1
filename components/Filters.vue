@@ -2,7 +2,7 @@
   <div class="flex w-full h-full deck-frame-white">
     <h2 class="text-lg w-full font-semibold">Filters</h2>
 
-      <div class="p-5 flex w-full justify-around space-x-1">
+      <!-- <div class="p-5 flex w-full space-x-2 items-center">
         <label for="years">Last</label>
         <input
           class="filter-input w-10"
@@ -12,9 +12,21 @@
           v-model="this.filterParams.years"
         />
         <p>years</p>
+    </div> -->
+
+    <div class="p-2 pt-4 w-full flex justify-between relative">
+      <label for="startHour">Years of data: </label>
+    </div>
+    <div class="p-2 flex w-full justify-around">
+      <div class="range-slider">
+        <span @change="slider">
+          <input v-model.number="this.filterParams.years" ref="inputYears" id="years" type="number" min="1" max="23"/></span>
+          <input @change="slider" v-model.number="this.filterParams.years" ref="inputYears" id="years" min="1" max="23" step="1" type="range" />
+        <svg width="100%" height="16"></svg>
+      </div>
     </div>
 
-    <div class="pt-5 w-full flex justify-between relative">
+    <div class="p-2 pt-4 w-full flex justify-between relative">
       <label for="startHour">Working hours: </label>
     </div>
     <div class="p-2 flex w-full justify-around">
@@ -28,7 +40,7 @@
       </div>
     </div>
 
-    <div class="pt-5 w-full flex justify-between relative">
+    <div class="p-2 pt-4 w-full flex justify-between relative">
       <label for="startMonth">Months from-to: </label>
     </div>
     <div class="p-2 pb-7 flex w-full justify-around">
