@@ -67,13 +67,8 @@
     display: block;
     border: 0px;
     font-weight: 500;
-    box-shadow: 0px 0px 14px -7px #f09819;
-    background-image: linear-gradient(
-      45deg,
-      #09a6d7 0%,
-      #42c2b3 51%,
-      #71d896 100%
-    );
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    background: #09a6d7;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
@@ -112,6 +107,7 @@
     font-size: 1em;
     margin: 6px;
     border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     /* -moz-appearance: textfield; */
   }
 
@@ -135,40 +131,44 @@
   }
 
   input[type="range"]:focus::-webkit-slider-runnable-track {
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
+    background: #09a6d7;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   input[type="range"]:focus::-ms-fill-lower {
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
+    background: #09a6d7;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   input[type="range"]:focus::-ms-fill-upper {
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
+    background: #09a6d7;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
-    animate: 0.2s;
-    background: linear-gradient(45deg, #09a6d7 0%, #42c2b3 51%, #71d896 100%);
+    background: #09a6d7;
     border-radius: 1px;
     box-shadow: none;
     border: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   input[type="range"]::-webkit-slider-thumb {
     z-index: 2;
     position: relative;
     box-shadow: 0px 0px 0px #000;
-    border: 1px solid #2497e3;
-    height: 18px;
-    width: 18px;
+    border: 1px solid #09a6d7;
+    height: 16px;
+    width: 16px;
     border-radius: 25px;
-    background: #a1d0ff;
+    background: #b5e4f3;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -7px;
+    margin-top: -5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   .overlay {
@@ -198,5 +198,9 @@
   .action-button {
     background-color: #09a6d7;
     color: white;
+  }
+
+  .main-text-color {
+    color: #000000;
   }
 }
