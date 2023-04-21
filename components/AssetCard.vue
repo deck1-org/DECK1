@@ -5,13 +5,31 @@
     </div>
     <div class="w-full border-t-2 border-black p-2">
       <h2 class="font-semibold mb-2">{{ asset.name }}</h2>
-      <label for="limit">Limit: </label>
-      <input
-        type="text"
-        v-model="limit"
-        class="w-20 border-2 rounded-md text-center"
-        disabled
-      />
+      <div v-if="asset.category === 'vessel'">
+        <label for="limit">Limit: </label>
+        <input
+          type="text"
+          v-model="asset.limit"
+          class="w-20 border-2 rounded-md text-center"
+          disabled
+        />
+      </div>
+      <div v-else-if="asset.category === 'helicopter'" class="flex flex-col">
+        <label for="limit">Cloudbase: </label>
+        <input
+          type="text"
+          v-model="asset.cloudbase"
+          class="w-20 border-2 rounded-md text-center"
+          disabled
+        />
+        <label for="limit">Visibility: </label>
+        <input
+          type="text"
+          v-model="asset.visibility"
+          class="w-20 border-2 rounded-md text-center"
+          disabled
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -24,11 +42,6 @@ export default {
       type: Object,
       required: true,
     },
-  },
-  data(props) {
-    return {
-      limit: props.asset.limit,
-    };
   },
 };
 </script>

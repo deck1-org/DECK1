@@ -30,12 +30,44 @@
           />
         </div>
         <div class="create-input">
-          <label for="limit">Limit: </label>
-          <input
+          <label for="name">Category: </label>
+          <!-- <input
             type="text"
-            v-model="asset.limit"
+            v-model="asset.category"
             class="border-2 rounded-md text-center"
-          />
+          /> -->
+          <select name="category" v-model="asset.category">
+            <option value="vessel">Vessel</option>
+            <option value="helicopter">Helicopter</option>
+          </select>
+        </div>
+        <div v-if="asset.category === 'vessel'">
+          <div class="create-input">
+            <label for="limit">Limit: </label>
+            <input
+              type="text"
+              v-model="asset.limit"
+              class="border-2 rounded-md text-center"
+            />
+          </div>
+        </div>
+        <div v-else-if="asset.category === 'helicopter'">
+          <div class="create-input">
+            <label for="limit">Cloudbase: </label>
+            <input
+              type="text"
+              v-model="asset.cloudbase"
+              class="border-2 rounded-md text-center"
+            />
+          </div>
+          <div class="create-input">
+            <label for="limit">Visibility: </label>
+            <input
+              type="text"
+              v-model="asset.visibility"
+              class="border-2 rounded-md text-center"
+            />
+          </div>
         </div>
       </div>
       <div class="flex w-full justify-end">
@@ -70,7 +102,7 @@ export default {
       asset: {
         id: ref(store.assets.length + 1),
         name: "",
-        limit: "",
+        category: "",
       },
     };
   },
