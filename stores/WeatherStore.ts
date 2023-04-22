@@ -1,16 +1,29 @@
 import { defineStore } from "pinia";
-import all_data from "~/assets/site-weather/SKRD-ROCKweather.json";
+import skrd from "~/static/SKRD-ROCK-weather.json";
 
 export const useWeatherStore = defineStore("WeatherStore", {
   state: () => {
-    const weatherData = ref(all_data);
+    const weatherData = ref<any>(skrd);
     const ctvSmallData = ref<Number[]>();
     const ctvLargeData = ref<Number[]>();
     const sovData = ref<Number[]>();
     const siteData = ref<Number[]>();
     const heliData = ref<Number[]>();
-    const labels = ref<String[]>(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
-    
+    const labels = ref<String[]>([
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ]);
+
     return {
       weatherData,
       ctvSmallData,
@@ -20,5 +33,15 @@ export const useWeatherStore = defineStore("WeatherStore", {
       heliData,
       labels,
     };
+  },
+  actions: {
+    async changeLocationAsync(selection: string) {
+      const data =
+        selection === "VW"
+          ? await import("@/static/VW-weather.json")
+          : await import("@/static/SKRD-ROCK-weather.json");
+      this.weatherData = data.default;
+      console.log(this.weatherData);
+    },
   },
 });

@@ -1,6 +1,6 @@
 <template>
   <div class="deck-frame-white h-full justify-center content-center">
-    <select id="location" v-model="location" @change="handleLocationChange()">
+    <select id="location" v-model="location" @change="handleLocationChange">
       <option value="" disabled selected>Location</option>
       <option v-for="(option, index) in options" :key="index" :value="option">
         {{ option }}
@@ -11,21 +11,29 @@
 
 <script>
 import { useFilterStore } from "~/stores/FilterStore";
+import { useWeatherStore } from "~/stores/WeatherStore";
 
 export default {
   name: "LocationDropdown",
   data() {
     return {
       location: "",
-      options: ["Location 1", "Location 2"], // to be changed - on component mount - need to get locations/sites from json file and asign it to options:
+      options: ["SKRD-ROCK", "VW"], // to be changed - on component mount - need to get locations/sites from json file and asign it to options:
+    };
+  },
+  setup() {
+    const filterStore = useFilterStore();
+    const weatherStore = useWeatherStore();
+
+    return {
+      filterStore,
+      weatherStore,
     };
   },
   methods: {
     handleLocationChange() {
-      const filterStore = useFilterStore();
-      filterStore.location = this.location;
-      filterStore.hideRecommendation = false;
-      // filterStore.loading = true; setting loading vlaue to true, so we can show loading wheel instead of chart with old data
+      this.filterStore.hideRecommendation = false;
+      this.weatherStore.changeLocationAsync(this.location);
     },
   },
 };

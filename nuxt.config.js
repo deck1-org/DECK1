@@ -2,6 +2,16 @@ export default {
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
   css: ["@/assets/css/main.css"],
   build: {
+    extend(config, { isClient }) {
+      if (isClient) {
+        config.module.rules.push({
+          test: /\.json$/,
+          loader: "json-loader",
+          type: "javascript/auto",
+          include: [path.resolve(__dirname, "static")],
+        });
+      }
+    },
     postcss: {
       postcssOptions: {
         plugins: {

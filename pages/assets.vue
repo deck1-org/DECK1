@@ -7,7 +7,7 @@
     </div>
     <CreateAssetModal v-if="isModalVisible" @hideModal="hideModal" />
     <div class="flex flex-col p-5">
-      <h2 class="text-lg font-semibold w-full">Vessels</h2>
+      <h2 class="text-lg font-semibold w-full pl-5">Vessels</h2>
       <div class="flex pb-5">
         <div
           v-for="asset in assets.filter((x) => x.category === 'vessel')"
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <h2 class="text-lg font-semibold w-full">Helicopters</h2>
+      <h2 class="text-lg font-semibold w-full pl-5 pt-5">Helicopters</h2>
       <div class="flex pb-5">
         <div
           v-for="asset in assets.filter((x) => x.category === 'helicopter')"
@@ -46,11 +46,9 @@ export default {
   methods: {
     showModal() {
       this.isModalVisible = true;
-      console.log(this.isModalVisible);
     },
     hideModal() {
       this.isModalVisible = false;
-      console.log(this.isModalVisible);
     },
   },
 };
