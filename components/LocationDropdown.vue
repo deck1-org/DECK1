@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       location: "",
-      options: ["SKRD-ROCK", "VW"], // to be changed - on component mount - need to get locations/sites from json file and asign it to options:
+      options: ["SKRD-ROCK", "VW", "PBG", "Thor"], // to be changed - on component mount - need to get locations/sites from json file and asign it to options:
     };
   },
   setup() {

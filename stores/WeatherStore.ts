@@ -36,10 +36,11 @@ export const useWeatherStore = defineStore("WeatherStore", {
   },
   actions: {
     async changeLocationAsync(selection: string) {
-      const data =
-        selection === "VW"
-          ? await import("@/static/VW-weather.json")
-          : await import("@/static/SKRD-ROCK-weather.json");
+      let data = 
+        selection === "VW" ? await import("@/static/VW-weather.json")
+          : selection === "SKRD-ROCK" ? await import("@/static/SKRD-ROCK-weather.json")
+          : selection === "PBG" ? await import("@/static/PBG-weather.json")
+          : await import("@/static/Thor-weather.json");
       this.weatherData = data.default;
       console.log(this.weatherData);
     },
