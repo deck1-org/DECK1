@@ -24,7 +24,7 @@
         </div>
         <div v-else class="h-[28px]"></div>
       </div>
-      <Filters @buttonClick="handleApplyChanges" :filterParams="filterParams" />
+      <Filters @buttonClick="handleApplyChanges" :filterProps="filterParams" />
     </div>
   </div>
   <div v-else class="py-10">
@@ -42,7 +42,7 @@ export default {
   layout: "default",
   name: "WeatherDownTime",
   props: {
-    chartId: Number,
+    chartId: Number
   },
   data(props) {
     return {

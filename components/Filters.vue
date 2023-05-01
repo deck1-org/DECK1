@@ -8,7 +8,7 @@
       <div class="range-slider">
         <span @change="slider">
           <input
-            v-model.number="this.filterParams.years"
+            v-model="filterParams.years"
             ref="inputYears"
             id="years"
             type="number"
@@ -17,7 +17,7 @@
         /></span>
         <input
           @change="slider"
-          v-model.number="this.filterParams.years"
+          v-model="filterParams.years"
           ref="inputYears"
           id="years"
           min="1"
@@ -36,13 +36,13 @@
       <div class="range-slider">
         <span @change="slider">
           <input
-            v-model.number="this.filterParams.startHour"
+            v-model.number="filterParams.startHour"
             ref="inputStartHour"
             type="number"
             min="0"
             max="23" />
           <input
-            v-model.number="this.filterParams.endHour"
+            v-model.number="filterParams.endHour"
             ref="inputEndHour"
             type="number"
             min="0"
@@ -50,7 +50,7 @@
         /></span>
         <input
           @change="slider"
-          v-model.number="this.filterParams.startHour"
+          v-model.number="filterParams.startHour"
           ref="inputStartHour"
           min="0"
           max="23"
@@ -59,7 +59,7 @@
         />
         <input
           @change="slider"
-          v-model.number="this.filterParams.endHour"
+          v-model.number="filterParams.endHour"
           ref="inputEndHour"
           min="0"
           max="23"
@@ -77,13 +77,13 @@
       <div class="range-slider">
         <span @change="slider">
           <input
-            v-model.number="this.filterParams.startMonth"
+            v-model.number="filterParams.startMonth"
             ref="inputStartMonth"
             type="number"
             min="1"
             max="12" />
           <input
-            v-model.number="this.filterParams.endMonth"
+            v-model.number="filterParams.endMonth"
             ref="inputEndMonth"
             type="number"
             min="1"
@@ -91,7 +91,7 @@
         /></span>
         <input
           @change="slider"
-          v-model.number="this.filterParams.startMonth"
+          v-model.number="filterParams.startMonth"
           ref="inputStartMonth"
           min="1"
           max="12"
@@ -100,7 +100,7 @@
         />
         <input
           @change="slider"
-          v-model.number="this.filterParams.endMonth"
+          v-model.number="filterParams.endMonth"
           ref="inputEndMonth"
           min="1"
           max="12"
@@ -123,7 +123,7 @@
 <script>
 export default {
   props: {
-    filterParams: {
+    filterProps: {
       startHour: Number,
       endHour: Number,
       startMonth: Number,
@@ -135,11 +135,11 @@ export default {
   data(props) {
     return {
       filterParams: {
-        startHour: props.filterParams.startHour,
-        endHour: props.filterParams.endHour,
-        startMonth: props.filterParams.startMonth,
-        endMonth: props.filterParams.endMonth,
-        years: props.filterParams.years,
+        startHour: props.filterProps.startHour,
+        endHour: props.filterProps.endHour,
+        startMonth: props.filterProps.startMonth,
+        endMonth: props.filterProps.endMonth,
+        years: props.filterProps.years,
       },
       error: ref(false),
       errorMessage: ref("Enter a valid input!"),
@@ -148,6 +148,7 @@ export default {
   },
   methods: {
     emitButtonClick() {
+      console.log(this.filterParams.years);
       this.checkInput();
       if (!this.error) {
         const data = {
