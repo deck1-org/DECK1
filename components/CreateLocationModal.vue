@@ -84,8 +84,9 @@
     data() {
       return {
         location: {
-          id: ref(store.locations.length + 1),
           name: "",
+          latitude: 0,
+          longitude: 0,
           limit: "",
         },
       };
@@ -94,8 +95,8 @@
       handleCancelClick() {
         this.$emit("hideModal");
       },
-      handleSaveClick() {
-        store.locations.push(this.location);
+      async handleSaveClick() {
+        await store.post(this.location)
         this.$emit("hideModal");
       },
     },

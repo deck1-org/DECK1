@@ -4,7 +4,7 @@
       <IconsAdd @click="showModal" class="cursor-pointer" />
     </div>
     <CreateLocationModal v-if="isModalVisible" @hideModal="hideModal" />
-    <div v-for="location in locations" :key="location.id" class="p-5">
+    <div v-for="location in locations" :key="location._id" class="p-5">
       <LocationCard :location="location" />
     </div>
   </div>
@@ -20,6 +20,9 @@ export default {
       locations: useLocationStore().locations,
       isModalVisible: false,
     };
+  },
+  mounted(){
+    useLocationStore().getAll()
   },
   methods: {
     showModal() {
