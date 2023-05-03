@@ -21,4 +21,10 @@ export default {
       },
     },
   },
+  runtimeConfig: {
+    mongodbUri: process.env.MONGO_URI,
+  },
+  nitro: {
+    plugins: ['@/server/db/index.ts']
+  }
 };
