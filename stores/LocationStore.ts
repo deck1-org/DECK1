@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ILocation } from '@/types/index'
 import axios from "axios"
+import { ObjectId } from "mongodb";
 
 export const useLocationStore = defineStore("LocationStore",{
     state: () => ({
@@ -19,6 +20,14 @@ export const useLocationStore = defineStore("LocationStore",{
         // }
     }),
     actions: {
+        async getByName(name: string) {
+            try {
+                let data = await $fetch<ILocation[]>(`/api/locations/${name}`);
+                return data as ILocation[]
+            } catch (e) {
+                console.error(e)
+            }
+        },
         async getAll() {
             try {
                 let data = await $fetch<ILocation[]>("/api/locations");
@@ -28,7 +37,7 @@ export const useLocationStore = defineStore("LocationStore",{
                 console.error(e)
             }
         },
-        async post(location: object) {
+        async post(location: ILocation) {
             try {
                 console.log('Registering location to database')
                 const response = await axios.post('/api/locations/create', location);

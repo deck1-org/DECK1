@@ -4,8 +4,13 @@
       <IconsAdd @click="showModal" class="cursor-pointer" />
     </div>
     <CreateLocationModal v-if="isModalVisible" @hideModal="hideModal" />
-    <div v-for="location in locations" :key="location._id" class="p-5">
-      <LocationCard :location="location" />
+    <div v-if="!loading" class="flex flex-wrap">
+      <div v-for="location in locations" :key="location._id" class="p-5">
+        <LocationCard :location="location" />
+      </div>
+    </div>
+    <div v-else>
+      Loading data...
     </div>
   </div>
 </template>
@@ -17,12 +22,14 @@ export default {
   name: "LocationList",
   data() {
     return {
-      locations: useLocationStore().locations,
+      locations: [],
       isModalVisible: false,
+      loading: true,
     };
   },
-  mounted(){
-    useLocationStore().getAll()
+  async mounted(){
+    this.locations = await useLocationStore().getAll()
+    this.locations === [] ? "" : this.loading = false;
   },
   methods: {
     showModal() {

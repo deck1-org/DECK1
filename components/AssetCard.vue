@@ -11,6 +11,7 @@
       <div v-if="asset.category === 'vessel'" class="flex justify-between">
         <label for="limit">Limit: </label>
         <p>{{ asset.limit }}m</p>
+          <IconsInfo class="" />
       </div>
       <div v-else-if="asset.category === 'helicopter'">
         <div class="flex justify-between">

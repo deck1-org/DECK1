@@ -148,7 +148,6 @@ export default {
   },
   methods: {
     emitButtonClick() {
-      console.log(this.filterParams.years);
       this.checkInput();
       if (!this.error) {
         const data = {

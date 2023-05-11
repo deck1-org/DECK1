@@ -1,7 +1,9 @@
+import { useWeatherdataStore } from "@/stores/WeatherdataStore";
 import { useWeatherStore } from "@/stores/WeatherStore";
 import { useAssetStore } from "~/stores/AssetStore";
 
-const store = useWeatherStore();
+const wdtStore = useWeatherStore()
+const dataStore = useWeatherdataStore();
 const assetStore = useAssetStore();
 
 // CONFIG LIMITS               move this to assetStores !!!
@@ -59,9 +61,11 @@ export function start(
   monthsSite = [];
   monthsHeli = [];
 
-  const weatherData: any = store.weatherData;
-
+  const weatherData: any = dataStore.currentData;
+  console.log(weatherData);
+  
   countYears(weatherData);
+  
   weatherData.forEach((element: any) => {
     if (element.Year >= amountOfYears - years + 1) {
       if (current_day === Number(element.Day)) {
@@ -150,29 +154,29 @@ export function start(
     monthsHeli[i] = monthsHeli[i] / years;
   }
 
-  store.ctvLargeData = monthsCtvBig;
-  store.ctvSmallData = monthsCtvSmall;
-  store.sovData = monthsSov;
-  store.siteData = monthsSite;
-  store.heliData = monthsHeli;
+  wdtStore.ctvLargeData = monthsCtvBig;
+  wdtStore.ctvSmallData = monthsCtvSmall;
+  wdtStore.sovData = monthsSov;
+  wdtStore.siteData = monthsSite;
+  wdtStore.heliData = monthsHeli;
 }
 
 function evaluateHourDay(element: any, newDay: boolean) {
   if (!newDay) {
     hoursCtvSmall.push(
-      parseFloat(element["Sign. wave height (Hs)"]) > conf_ctv_small_limit
+      parseFloat(element.Sign[" wave height (Hs)"]) > conf_ctv_small_limit
         ? 1
         : 0
     );
     hoursCtvBig.push(
-      parseFloat(element["Sign. wave height (Hs)"]) > conf_ctv_big_limit ? 1 : 0
+      parseFloat(element.Sign[" wave height (Hs)"]) > conf_ctv_big_limit ? 1 : 0
     );
     hoursSov.push(
-      parseFloat(element["Sign. wave height (Hs)"]) > conf_sov_limit ? 1 : 0
+      parseFloat(element.Sign[" wave height (Hs)"]) > conf_sov_limit ? 1 : 0
     );
     hoursSite.push(parseFloat(element["Wind speed"]) > conf_site_limit ? 1 : 0);
     hoursHeli.push(
-      parseFloat(element["Visibility"]) < conf_heli_visibility_limit ||
+      parseFloat(element.Visibility) < conf_heli_visibility_limit ||
         Number(element["VFR cloud"]) === conf_heli_cloudbase_limit
         ? 1
         : 0
@@ -238,11 +242,11 @@ function evaluateMonth(
 }
 
 function countYears(weatherData: any) {
-  let year = 0;
+  let maxYear = 0;
   for (const item of weatherData) {
-    if (item.Year != year) {
-      amountOfYears++;
-      year = item.Year;
+    if (item.Year > maxYear) {
+      maxYear = item.Year;
     }
   }
+  amountOfYears = maxYear;
 }

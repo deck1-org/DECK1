@@ -3,7 +3,7 @@
       <div class="w-full h-40 flex justify-center items-center">
         Place for image
       </div>
-      <button @click="postData">Add data</button>
+      <button @click="postData">Register data to database</button>
       <div class="w-full border-t-2 border-black p-2">
         <h2 class="font-semibold mb-2">{{ location.name }}</h2>
         <label for="latitude">Latitude: </label>
@@ -33,7 +33,7 @@
   
   <script>
   import weatherdata from '@/static/SKRD-ROCK-weather.json'
-  import axios from "axios"
+  import { useWeatherdataStore } from "~/stores/WeatherdataStore";
 
   export default {
     name: "LocationCard",
@@ -45,6 +45,7 @@
     },
     data(props) {
       return {
+        name: props.location.name,
         latitude: props.location.latitude,
         longitude: props.location.longitude,
         limit: props.location.limit,
@@ -53,18 +54,8 @@
     },
     methods: {
       async postData() {
-        this.weatherData.forEach(entry => {
-          entry.location = 'testlocation';
-        })
-        try {
-          console.log('Starting to register weather data in database')
-          const response = await axios.post('/api/weatherdata/create', this.weatherData);
-          console.log(response.data.message);
-          // handle success
-        } catch (error) {
-          console.error(error);
-          // handle error
-        }
+        const weatherData = await import(`~/static/${this.location.name}-weather.json`)
+        useWeatherdataStore().postData(weatherData.default, this.location)
       }
     }
   };

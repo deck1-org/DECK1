@@ -11,19 +11,26 @@
 
 <script>
 import { useFilterStore } from "~/stores/FilterStore";
-import { useWeatherStore } from "~/stores/WeatherStore";
+import { useWeatherdataStore } from "~/stores/WeatherdataStore";
+import { useLocationStore } from "~/stores/LocationStore";
 
 export default {
   name: "LocationDropdown",
   data() {
     return {
       location: "",
-      options: ["SKRD-ROCK", "VW", "PBG", "Thor"], // to be changed - on component mount - need to get locations/sites from json file and asign it to options:
+      options: [], // to be changed - on component mount - need to get locations/sites from json file and asign it to options:
     };
+  },
+  async mounted(){
+    const locations = await useLocationStore().getAll()
+    locations.forEach((entry) => {
+      this.options.push(entry.name)
+    })
   },
   setup() {
     const filterStore = useFilterStore();
-    const weatherStore = useWeatherStore();
+    const weatherStore = useWeatherdataStore();
 
     return {
       filterStore,
@@ -31,9 +38,11 @@ export default {
     };
   },
   methods: {
-    handleLocationChange() {
+    async handleLocationChange() {
       this.filterStore.hideRecommendation = false;
-      this.weatherStore.changeLocationAsync(this.location);
+      let locationId = await useLocationStore().getByName(this.location)
+      locationId = locationId.map(location => location._id)
+      await useWeatherdataStore().getByLocationId(locationId)
     },
   },
 };
