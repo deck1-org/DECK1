@@ -3,7 +3,12 @@
       <div class="w-full h-40 flex justify-center items-center">
         Place for image
       </div>
-      <button @click="postData">Register data to database</button>
+      <div v-if="isDataRegistered">
+        <button @click="postData">Register data</button>
+      </div>
+      <div v-else>
+        <p>Data is present</p>
+      </div>
       <div class="w-full border-t-2 border-black p-2">
         <h2 class="font-semibold mb-2">{{ location.name }}</h2>
         <label for="latitude">Latitude: </label>
@@ -50,7 +55,14 @@
         longitude: props.location.longitude,
         limit: props.location.limit,
         weatherData: weatherdata,
+        isDataRegistered: false,
       };
+    },
+    //check if data is registered with the provided location id
+    async mounted() {
+      if (!await useWeatherdataStore().checkByLocationId(this.location._id)){
+        this.isDataRegistered = true
+      }
     },
     methods: {
       async postData() {

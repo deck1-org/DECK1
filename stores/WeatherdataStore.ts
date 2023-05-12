@@ -16,6 +16,15 @@ export const useWeatherdataStore = defineStore("WeatherdataStore", {
     }),
 
     actions: {
+        //check if data is registered with the provided location id
+        async checkByLocationId(locationId: string) {
+            try {
+                let data = await $fetch<IWeatherdata[]>(`/api/weatherdata/find/${locationId}`);
+                return data;
+            } catch (e) {
+                console.error(e)
+            }
+        },
         async getByLocationId(locationId: string){
             try {
                 let data = this.allFetchedData[locationId];
