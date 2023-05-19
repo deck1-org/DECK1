@@ -40,9 +40,11 @@ export default {
   methods: {
     async handleLocationChange() {
       this.filterStore.hideRecommendation = false;
+      this.$emit("loading");
       let locationId = await useLocationStore().getByName(this.location)
       locationId = locationId.map(location => location._id)
       await useWeatherdataStore().getByLocationId(locationId)
+      this.$emit("loading")
     },
   },
 };

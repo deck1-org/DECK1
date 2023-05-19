@@ -14,7 +14,7 @@
     <div class="w-1/5 h-full p-3">
       <div class="flex flex-row-reverse text-lg w-full py-5">
         <div
-          v-if="chartId !== 1"
+          v-if="this.amountOfCharts > 1"
           class="flex gap-1.5 flex-row-reverse items-center hover:text-gray-400 group hover:translate-y-[-3px] transition-all ease-in-out cursor-pointer"
         >
           <IconsRemove class="stroke-1 group-hover:text-red-400" />
@@ -42,7 +42,8 @@ export default {
   layout: "default",
   name: "WeatherDownTime",
   props: {
-    chartId: Number
+    chartId: Number,
+    amountOfCharts: Number,
   },
   data(props) {
     return {
@@ -68,7 +69,7 @@ export default {
       this.chartComponentKey = !this.chartComponentKey;
     },
     emitRemove() {
-      this.$emit("remove", this.filterParams.chartId);
+      this.$emit("remove", this.chartId);
     },
     hideToggle() {
       this.showComponents = !this.showComponents;
