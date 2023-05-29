@@ -37,21 +37,21 @@
             class="border-2 rounded-md text-center"
           /> -->
           <select name="category" v-model="asset.category">
-            <option value="vessel">Vessel</option>
-            <option value="helicopter">Helicopter</option>
+            <option value="Vessel">Vessel</option>
+            <option value="Helicopter">Helicopter</option>
           </select>
         </div>
-        <div v-if="asset.category === 'vessel'">
+        <div v-if="asset.category === 'Vessel'">
           <div class="create-input">
-            <label for="limit">Limit: </label>
+            <label for="limit">HS limit: </label>
             <input
               type="text"
-              v-model="asset.limit"
+              v-model="asset.hs"
               class="border-2 rounded-md text-center"
             />
           </div>
         </div>
-        <div v-else-if="asset.category === 'helicopter'">
+        <div v-else-if="asset.category === 'Helicopter'">
           <div class="create-input">
             <label for="limit">Cloudbase: </label>
             <input
@@ -100,7 +100,7 @@ export default {
   data() {
     return {
       asset: {
-        id: ref(store.assets.length + 1),
+        id: "auto",
         name: "",
         category: "",
       },
@@ -110,8 +110,8 @@ export default {
     handleCancelClick() {
       this.$emit("hideModal");
     },
-    handleSaveClick() {
-      store.assets.push(this.asset);
+    async handleSaveClick() {
+      await store.post(this.asset);
       this.$emit("hideModal");
     },
   },

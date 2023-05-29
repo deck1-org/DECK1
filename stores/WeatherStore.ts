@@ -4,11 +4,9 @@ import skrd from "~/static/SKRD-ROCK-weather.json";
 export const useWeatherStore = defineStore("WeatherStore", {
   state: () => {
     const weatherData = ref<any>(skrd);
-    const ctvSmallData = ref<Number[]>();
-    const ctvLargeData = ref<Number[]>();
-    const sovData = ref<Number[]>();
-    const siteData = ref<Number[]>();
-    const heliData = ref<Number[]>();
+    const assetsWdt: any = {
+      
+    }
     const labels = ref<String[]>([
       "Jan",
       "Feb",
@@ -26,11 +24,7 @@ export const useWeatherStore = defineStore("WeatherStore", {
 
     return {
       weatherData,
-      ctvSmallData,
-      ctvLargeData,
-      sovData,
-      siteData,
-      heliData,
+      assetsWdt,
       labels,
     };
   },

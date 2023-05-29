@@ -1,43 +1,27 @@
 import { useWeatherdataStore } from "@/stores/WeatherdataStore";
 import { useWeatherStore } from "@/stores/WeatherStore";
 import { useAssetStore } from "~/stores/AssetStore";
+import { IAsset } from "~/types";
 
 const wdtStore = useWeatherStore()
 const dataStore = useWeatherdataStore();
 const assetStore = useAssetStore();
 
-// CONFIG LIMITS               move this to assetStores !!!
-const conf_ctv_small_limit: number = assetStore.ctv_small.limit;
-const conf_ctv_big_limit: number = assetStore.ctv_big.limit;
-const conf_sov_limit: number = assetStore.sov.limit;
-const conf_heli_visibility_limit: number = assetStore.heli.visibility;
-const conf_heli_cloudbase_limit: number = assetStore.heli.cloudbase;
-
+// CONFIG LIMITS
 const conf_site_limit: number = 18; /////////////////
 
-// CONFIG THRESHOLDS - percentage of a day that can be no-fly                move this to assetStores !!!
+
+// CONFIG THRESHOLDS - percentage of a day that can be no-fly 
 const threshold: number = 0.5;
 
 //hours
-let hoursCtvSmall: Number[] = [],
-  hoursCtvBig: Number[] = [],
-  hoursSov: Number[] = [],
-  hoursSite: Number[] = [],
-  hoursHeli: Number[] = [];
+let hoursAsset: Number[] = []
 
 //days
-let daysCtvSmall: number[] = [],
-  daysCtvBig: number[] = [],
-  daysSov: number[] = [],
-  daysSite: number[] = [],
-  daysHeli: number[] = [];
+let daysAsset: number[] = []
 
 //months
-let monthsCtvSmall: number[] = [],
-  monthsCtvBig: number[] = [],
-  monthsSov: number[] = [],
-  monthsSite: number[] = [],
-  monthsHeli: number[] = [];
+let monthsAsset: number[] = []
 
 let current_day: number;
 let current_month: number;
@@ -48,21 +32,17 @@ export function start(
   timeRangeEnd: number,
   startMonth: number,
   endMonth: number,
-  years: number
+  years: number,
+  asset: any,
 ) {
   startMonth = startMonth;
   endMonth = endMonth;
   current_day = 1;
   current_month = 1;
   amountOfYears = 0;
-  monthsCtvSmall = [];
-  monthsCtvBig = [];
-  monthsSov = [];
-  monthsSite = [];
-  monthsHeli = [];
+  monthsAsset = [];
 
   const weatherData: any = dataStore.currentData;
-  console.log(weatherData);
   
   countYears(weatherData);
   
@@ -74,18 +54,18 @@ export function start(
           Number(element.Hour) <= timeRangeEnd
         ) {
           //evaluate hourly wdt
-          evaluateHourDay(element, false);
+          evaluateHourDay(asset, element, false);
         }
       } else {
         //evaluate day wdt
-        evaluateHourDay(element, true);
+        evaluateHourDay(asset, element, true);
 
         //without this part, one hour is skipped!!
         if (
           Number(element.Hour) >= timeRangeStart &&
           Number(element.Hour) <= timeRangeEnd
         ) {
-          evaluateHourDay(element, false);
+          evaluateHourDay(asset, element, false);
         }
 
         //increment current day
@@ -98,48 +78,16 @@ export function start(
           Number(element.Day) === 31 &&
           Number(element.Hour) === timeRangeEnd)
       ) {
-        monthsCtvSmall = evaluateMonth(
-          monthsCtvSmall,
-          daysCtvSmall,
-          current_month,
-          startMonth,
-          endMonth
-        );
-        monthsCtvBig = evaluateMonth(
-          monthsCtvBig,
-          daysCtvBig,
-          current_month,
-          startMonth,
-          endMonth
-        );
-        monthsSov = evaluateMonth(
-          monthsSov,
-          daysSov,
-          current_month,
-          startMonth,
-          endMonth
-        );
-        monthsSite = evaluateMonth(
-          monthsSite,
-          daysSite,
-          current_month,
-          startMonth,
-          endMonth
-        );
-        monthsHeli = evaluateMonth(
-          monthsHeli,
-          daysHeli,
+        monthsAsset = evaluateMonth(
+          monthsAsset,
+          daysAsset,
           current_month,
           startMonth,
           endMonth
         );
 
         //clear days arrays
-        daysCtvSmall = [];
-        daysCtvBig = [];
-        daysSov = [];
-        daysSite = [];
-        daysHeli = [];
+        daysAsset = [];
         //increment current month
         current_month = Number(element.Month);
       }
@@ -147,79 +95,44 @@ export function start(
   });
 
   for (let i = 0; i < 12; i++) {
-    monthsCtvSmall[i] = monthsCtvSmall[i] / years;
-    monthsCtvBig[i] = monthsCtvBig[i] / years;
-    monthsSov[i] = monthsSov[i] / years;
-    monthsSite[i] = monthsSite[i] / years;
-    monthsHeli[i] = monthsHeli[i] / years;
+    monthsAsset[i] = monthsAsset[i] / years;
   }
 
-  wdtStore.ctvLargeData = monthsCtvBig;
-  wdtStore.ctvSmallData = monthsCtvSmall;
-  wdtStore.sovData = monthsSov;
-  wdtStore.siteData = monthsSite;
-  wdtStore.heliData = monthsHeli;
+  const name = asset ? asset.name : "Site";
+  wdtStore.assetsWdt[name] = monthsAsset;
 }
-
-function evaluateHourDay(element: any, newDay: boolean) {
+function evaluateHourDay(asset: any, element: any, newDay: boolean) {
   if (!newDay) {
-    hoursCtvSmall.push(
-      parseFloat(element.Sign[" wave height (Hs)"]) > conf_ctv_small_limit
+    if (asset) {
+    if (asset.category === "Vessel") {
+    hoursAsset.push(
+      parseFloat(element.Sign[" wave height (Hs)"]) > asset.hs
         ? 1
         : 0
     );
-    hoursCtvBig.push(
-      parseFloat(element.Sign[" wave height (Hs)"]) > conf_ctv_big_limit ? 1 : 0
-    );
-    hoursSov.push(
-      parseFloat(element.Sign[" wave height (Hs)"]) > conf_sov_limit ? 1 : 0
-    );
-    hoursSite.push(parseFloat(element["Wind speed"]) > conf_site_limit ? 1 : 0);
-    hoursHeli.push(
-      parseFloat(element.Visibility) < conf_heli_visibility_limit ||
-        Number(element["VFR cloud"]) === conf_heli_cloudbase_limit
-        ? 1
-        : 0
-    );
+    }
+    else if (asset.category === "Helicopter") {
+      hoursAsset.push(
+        parseFloat(element.Visibility) < asset.visibility ||
+          Number(element["VFR cloud"]) === asset.cloudbase
+          ? 1
+          : 0
+      );
+    } 
+    } else {
+      hoursAsset.push(parseFloat(element["Wind speed"]) > conf_site_limit ? 1 : 0);
+    }
+    
   } else {
-    daysCtvSmall.push(
-      hoursCtvSmall.filter((num) => num === 1).length / hoursCtvSmall.length >=
+    daysAsset.push(
+      hoursAsset.filter((num) => num === 1).length / hoursAsset.length >=
         threshold
         ? 1
         : 0
     );
-    daysCtvBig.push(
-      hoursCtvBig.filter((num) => num === 1).length / hoursCtvBig.length >=
-        threshold
-        ? 1
-        : 0
-    );
-    daysSov.push(
-      hoursSov.filter((num) => num === 1).length / hoursSov.length >= threshold
-        ? 1
-        : 0
-    );
-    daysSite.push(
-      hoursSite.filter((num) => num === 1).length / hoursSite.length >=
-        threshold
-        ? 1
-        : 0
-    );
-    daysHeli.push(
-      hoursHeli.filter((num) => num === 1).length / hoursHeli.length >=
-        threshold
-        ? 1
-        : 0
-    );
-
+    
     //reset hours arrays
-    [hoursCtvSmall, hoursCtvBig, hoursSov, hoursSite, hoursHeli] = [
-      [],
-      [],
-      [],
-      [],
-      [],
-    ];
+    hoursAsset = [];
   }
 }
 

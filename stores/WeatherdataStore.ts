@@ -40,7 +40,7 @@ export const useWeatherdataStore = defineStore("WeatherdataStore", {
         },
         async postData(weatherData: any[], location: ILocation) {
             weatherData.forEach((entry) => {
-                entry.location = location._id;
+                entry.location = location;
             })
             try {
                 console.log('Starting to register weather data in database')

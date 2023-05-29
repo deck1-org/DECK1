@@ -9,7 +9,17 @@
           <p class="text-decoration font-semibold" @click="hideToggle">Hide</p>
         </div>
       </div>
-      <ChartComponent :key="chartComponentKey" :filterParams="filterParams" />
+        <div v-if="loading">
+            <section class="flex items-center justify-center h-full w-full">
+        <div class="h-20 w-20 mr-10 rounded-full bg-blue-300 animate-pulse"></div>
+        <div class="h-20 w-20 mr-10 rounded-full bg-blue-300 animate-pulse"></div>
+        <div class="h-20 w-20 mr-10 rounded-full bg-blue-300 animate-pulse"></div>
+        <div class="h-20 w-20 mr-10 rounded-full bg-blue-300 animate-pulse"></div>
+        <div class="h-20 w-20 rounded-full bg-blue-300 animate-pulse"></div>
+      </section>
+        </div>
+        <div v-else>
+        <ChartComponent :key="chartComponentKey" :filterParams="filterParams" /></div>
     </div>
     <div class="w-1/5 h-full p-3">
       <div class="flex flex-row-reverse text-lg w-full py-5">
@@ -38,6 +48,8 @@
 </template>
 
 <script>
+import { useLocationStore } from "~/stores/LocationStore";
+
 export default {
   layout: "default",
   name: "WeatherDownTime",
@@ -57,6 +69,7 @@ export default {
         years: ref(10),
         chartId: props.chartId,
       },
+      loading: useLocationStore().loading,
     };
   },
   methods: {

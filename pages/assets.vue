@@ -8,9 +8,9 @@
     <CreateAssetModal v-if="isModalVisible" @hideModal="hideModal" />
     <div class="flex flex-col p-5">
       <h2 class="text-lg font-semibold w-full pl-5">Vessels</h2>
-      <div class="flex pb-5">
+      <div class="flex pb-5" v-if="assets !== undefined">
         <div
-          v-for="asset in assets.filter((x) => x.category === 'vessel')"
+          v-for="asset in assets.filter((x) => x.category === 'Vessel')"
           :key="asset.id"
           class="p-5"
         >
@@ -19,9 +19,9 @@
       </div>
 
       <h2 class="text-lg font-semibold w-full pl-5 pt-5">Helicopters</h2>
-      <div class="flex pb-5">
+      <div class="flex pb-5"  v-if="assets !== undefined">
         <div
-          v-for="asset in assets.filter((x) => x.category === 'helicopter')"
+          v-for="asset in assets.filter((x) => x.category === 'Helicopter')"
           :key="asset.id"
           class="p-5"
         >
@@ -39,9 +39,14 @@ export default {
   name: "AssetList",
   data() {
     return {
-      assets: useAssetStore().assets,
+      assets: [],
       isModalVisible: false,
+      loading: false,
     };
+  },
+  async mounted(){
+    this.assets = await useAssetStore().getAll();
+    this.assets === [] ? "" : this.loading = false;
   },
   methods: {
     showModal() {

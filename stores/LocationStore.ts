@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { ILocation } from '@/types/index'
 import axios from "axios"
-import { ObjectId } from "mongodb";
 
 export const useLocationStore = defineStore("LocationStore",{
     state: () => ({
@@ -10,6 +9,7 @@ export const useLocationStore = defineStore("LocationStore",{
         // const location3 = reactive<object>({id: 3,name: "Location 3",latitude: "34.321843",longitude: "19.231034", limit: 13});
         // const location4 = reactive<object>({id: 4,name: "Location 4",latitude: "42.497681",longitude: "27.470030", limit: 19});
         locations: [] as ILocation[],
+        loading: false,
         
         // return{
         //     location1,
@@ -48,6 +48,9 @@ export const useLocationStore = defineStore("LocationStore",{
                 // handle error
             }
             this.getAll()
+        },
+        toggleLoading(){
+            this.loading = !this.loading;
         }
     }
 });

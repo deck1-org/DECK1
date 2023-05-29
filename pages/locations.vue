@@ -31,6 +31,10 @@ export default {
     this.locations = await useLocationStore().getAll()
     this.locations === [] ? "" : this.loading = false;
   },
+  async updated() {
+    this.locations = await useLocationStore().getAll()
+    this.locations === [] ? "" : this.loading = false;
+  },
   methods: {
     showModal() {
       this.isModalVisible = true;

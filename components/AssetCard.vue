@@ -8,12 +8,12 @@
         <h2 class="font-semibold text-lg mb-2">{{ asset.name }}</h2>
         <IconsCardOptions />
       </div>
-      <div v-if="asset.category === 'vessel'" class="flex justify-between">
-        <label for="limit">Limit: </label>
-        <p>{{ asset.limit }}m</p>
+      <div v-if="asset.category === 'Vessel'" class="flex justify-between">
+        <label for="limit">HS limit: </label>
+        <p>{{ asset.hs }}m</p>
           <IconsInfo class="" />
       </div>
-      <div v-else-if="asset.category === 'helicopter'">
+      <div v-else-if="asset.category === 'Helicopter'">
         <div class="flex justify-between">
           <label for="limit" class="w-min">Cloudbase: </label>
           <p class="w-min">{{ asset.cloudbase }}</p>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+
 export default {
   name: "AssetCard",
   props: {

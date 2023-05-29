@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       location: "",
-      options: [], // to be changed - on component mount - need to get locations/sites from json file and asign it to options:
+      options: [],
     };
   },
   async mounted(){
@@ -40,10 +40,12 @@ export default {
   methods: {
     async handleLocationChange() {
       this.filterStore.hideRecommendation = false;
-      this.$emit("loading");
+      useLocationStore().toggleLoading();
+      this.$emit("loading")
       let locationId = await useLocationStore().getByName(this.location)
       locationId = locationId.map(location => location._id)
       await useWeatherdataStore().getByLocationId(locationId)
+      useLocationStore().toggleLoading();
       this.$emit("loading")
     },
   },

@@ -1,3 +1,4 @@
+//locations
 export interface ILocation {
     _id?: string;
     name: string;
@@ -5,7 +6,7 @@ export interface ILocation {
     longitude: number;
     limit: number;
 }
-
+//weatherdata
 export interface IWeatherdata {
     Year: number;
     Month: number;
@@ -15,5 +16,14 @@ export interface IWeatherdata {
     Windspeed: number;
     Visibility: number;
     Cloud: number;
-    locationId: string;
+    locationId: ILocation;
+}
+//assets
+export interface IAsset {
+    _id?: string;
+    name: string;
+    category: string;
+    hs: number;
+    cloudbase: number;
+    visibility: number;
 }

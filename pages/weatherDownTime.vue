@@ -1,19 +1,16 @@
 <template>
   <div class="w-full h-full deck-frame-grey inline-block">
     <div class="w-1/5 h-20 p-3">
-      <LocationDropdown @loading="toggleLoading" />
-    </div>
-    <div v-if="loading" class="w-1/5 h-20 p-3">
-      <p>Loading data...</p>
+      <LocationDropdown @loading="toggleChartKey" />
     </div>
     <div class="w-4/5 h-20 p-3">
       <RecommendationPopUp />
     </div>
     <div class="flex flex-col">
       <div v-for="id in ids" :key="id">
-        <GraphFilter @remove="handleRemove" :chartId="id" :amountOfCharts="ids.length"/>
+        <GraphFilter :key="chartKey" @remove="handleRemove" :chartId="id" :amountOfCharts="ids.length"/>
       </div>
-    </div>
+    </div>  
     <div class="w-full p-3">
       <button
         v-if="ids.length !== 3"
@@ -34,7 +31,7 @@ export default {
   data() {
     return {
       ids: [1],
-      loading: false,
+      chartKey: false,
     };
   },
   methods: {
@@ -46,8 +43,8 @@ export default {
         this.ids = this.ids.filter((el) => el !== id);
       }
     },
-    toggleLoading() {
-      this.loading = !this.loading;
+    toggleChartKey() {
+      this.chartKey = !this.chartKey;
     },
   },
 };
