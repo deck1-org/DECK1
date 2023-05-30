@@ -49,9 +49,9 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 url: https://cds.climate.copernicus.eu/api/v2
 key: <api_key>
 ```
-- For CDS users, Go to this page and copy the 2 line code displayed in the black box in the "Install the CDS API key" section.
+  - For CDS users, Go to this page and copy the 2 line code displayed in the black box in the "Install the CDS API key" section.
 3. Paste the 2 line code into a ".cdsapirc" file, where in your windows environment, %USERPROFILE% is usually located at C:\Users\Username folder). The CDS API expects to find the .cdsapirc file in your home directory.
-- For instructions on how to create a dot file on Windows, please see here or check the instructions provided by one of users on the User Forum.
+  - For instructions on how to create a dot file on Windows, please see here or check the instructions provided by one of users on the User Forum.
 
 4. Install the CDS API client by running the following command in a Command Prompt window:
 
