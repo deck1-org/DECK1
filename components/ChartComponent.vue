@@ -23,7 +23,7 @@ export default {
       const assets = assetStore.assets;
       for (let i = 0; i < assets.length; i++){
         start(
-          props.filterParams.startHour, // instead of passing it as a properties for the function we could read the stuff from the store in calculations, that way we can use start method in other places, and dont have to pass it as props through components
+          props.filterParams.startHour,
           props.filterParams.endHour,
           props.filterParams.startMonth,
           props.filterParams.endMonth,
@@ -32,7 +32,7 @@ export default {
         );
       }
       start(
-        props.filterParams.startHour, // instead of passing it as a properties for the function we could read the stuff from the store in calculations, that way we can use start method in other places, and dont have to pass it as props through components
+        props.filterParams.startHour,
         props.filterParams.endHour,
         props.filterParams.startMonth,
         props.filterParams.endMonth,

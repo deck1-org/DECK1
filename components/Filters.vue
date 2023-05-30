@@ -112,7 +112,7 @@
     </div>
     <p class="text-red-600 w-full" v-if="error">{{ errorMessage }}</p>
     <button
-      class="mx-2 my-3 p-1 px-3 rounded-md border-2 text-center px-2 button-87"
+      class="mx-2 my-3 p-1 px-3 rounded-md border-2 text-center button-87"
       @click="emitButtonClick"
     >
       Apply changes
