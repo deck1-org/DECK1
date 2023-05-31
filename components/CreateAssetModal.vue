@@ -31,11 +31,6 @@
         </div>
         <div class="create-input">
           <label for="name">Category: </label>
-          <!-- <input
-            type="text"
-            v-model="asset.category"
-            class="border-2 rounded-md text-center"
-          /> -->
           <select name="category" v-model="asset.category">
             <option value="Vessel">Vessel</option>
             <option value="Helicopter">Helicopter</option>

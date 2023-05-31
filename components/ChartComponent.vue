@@ -18,9 +18,11 @@ export default {
   setup(props) {
     const weatherStore = useWeatherStore();
     const assetStore = useAssetStore();
+
     onMounted(() => {
-      assetStore.getAll();
+      if (assetStore.assets.length === 0) assetStore.getAll();
       const assets = assetStore.assets;
+      //Call the calculations for each asset
       for (let i = 0; i < assets.length; i++){
         start(
           props.filterParams.startHour,
@@ -31,6 +33,7 @@ export default {
           assets[i]
         );
       }
+      //Call the calculations for the site
       start(
         props.filterParams.startHour,
         props.filterParams.endHour,
@@ -52,7 +55,7 @@ export default {
           borderRadius: 10,
         })
       }
-
+      //Create chart object
       const myChart = new Chart(
         document.getElementById("wdtChart" + props.filterParams.chartId),
         {

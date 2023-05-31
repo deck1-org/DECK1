@@ -1,15 +1,11 @@
 import { useWeatherdataStore } from "@/stores/WeatherdataStore";
 import { useWeatherStore } from "@/stores/WeatherStore";
-import { useAssetStore } from "~/stores/AssetStore";
-import { IAsset } from "~/types";
 
 const wdtStore = useWeatherStore()
 const dataStore = useWeatherdataStore();
-const assetStore = useAssetStore();
 
 // CONFIG LIMITS
-const conf_site_limit: number = 18; /////////////////
-
+const conf_site_limit: number = 18;
 
 // CONFIG THRESHOLDS - percentage of a day that can be no-fly 
 const threshold: number = 0.5;
@@ -60,7 +56,7 @@ export function start(
         //evaluate day wdt
         evaluateHourDay(asset, element, true);
 
-        //without this part, one hour is skipped!!
+        //without this part, one hour is skipped
         if (
           Number(element.Hour) >= timeRangeStart &&
           Number(element.Hour) <= timeRangeEnd
@@ -107,16 +103,14 @@ function evaluateHourDay(asset: any, element: any, newDay: boolean) {
     if (asset.category === "Vessel") {
     hoursAsset.push(
       parseFloat(element.Sign[" wave height (Hs)"]) > asset.hs
-        ? 1
-        : 0
+        ? 1 : 0
     );
     }
     else if (asset.category === "Helicopter") {
       hoursAsset.push(
         parseFloat(element.Visibility) < asset.visibility ||
           Number(element["VFR cloud"]) === asset.cloudbase
-          ? 1
-          : 0
+          ? 1 : 0
       );
     } 
     } else {
@@ -127,8 +121,7 @@ function evaluateHourDay(asset: any, element: any, newDay: boolean) {
     daysAsset.push(
       hoursAsset.filter((num) => num === 1).length / hoursAsset.length >=
         threshold
-        ? 1
-        : 0
+        ? 1 : 0
     );
     
     //reset hours arrays

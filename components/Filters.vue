@@ -167,7 +167,7 @@ export default {
         this.$refs.inputEndHour.value < 0 ||
         this.$refs.inputEndHour.value > 23 ||
         Number(this.$refs.inputStartHour.value) >
-          Number(this.$refs.inputEndHour.value) ||
+        Number(this.$refs.inputEndHour.value) ||
         Number(this.$refs.inputStartHour.value) % 1 !== 0 ||
         Number(this.$refs.inputEndHour.value) % 1 !== 0 ||
         this.$refs.inputEndHour.value === "" ||
@@ -178,7 +178,7 @@ export default {
         this.$refs.inputEndMonth.value < 1 ||
         this.$refs.inputEndMonth.value > 12 ||
         Number(this.$refs.inputStartMonth.value) >
-          Number(this.$refs.inputEndMonth.value) ||
+        Number(this.$refs.inputEndMonth.value) ||
         Number(this.$refs.inputStartMonth.value) % 1 !== 0 ||
         Number(this.$refs.inputEndMonth.value) % 1 !== 0 ||
         this.$refs.inputStartMonth.value === "" ||

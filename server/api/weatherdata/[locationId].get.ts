@@ -2,7 +2,7 @@ import WeatherModel from '~/server/models/WeatherData.model'
 
 export default defineEventHandler(async (event) => {
     const id = event.context.params?.locationId;
-    let sortedData = await WeatherModel.find({ location: id })
+    let sortedData = await WeatherModel.find({ "location._id": id })
 
     sortedData = sortedData.sort((a, b) => {
         if (a.Year !== b.Year) {
