@@ -18,7 +18,7 @@
         class="w-full border-2 border-gray-400 rounded-full py-1 font-semibold text-xl text-gray-600"
         @click="addGraph"
       >
-        Add more graph
+        Add more graphs
       </button>
     </div>
   </div>
@@ -30,9 +30,12 @@ export default {
   name: "WeatherDownTime",
   data() {
     return {
-      ids: [1],
+      ids: [],
       chartKey: false,
     };
+  },
+  mounted(){
+    this.ids.push(1);
   },
   methods: {
     addGraph() {

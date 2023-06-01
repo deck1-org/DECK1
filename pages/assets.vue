@@ -47,6 +47,10 @@ export default {
   async mounted(){
     this.assets = await useAssetStore().getAll();
     this.assets === [] ? "" : this.loading = false;
+  }, 
+  async updated() {
+    this.assets = await useAssetStore().getAll();
+    this.assets === [] ? "" : this.loading = false;
   },
   methods: {
     showModal() {
