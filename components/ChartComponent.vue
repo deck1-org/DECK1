@@ -33,6 +33,18 @@ export default {
           assets[i]
         );
       }
+      
+      function generateRandomColor() {
+        // Generate random values for red, green, and blue channels
+        var red = Math.floor(Math.random() * 256);
+        var green = Math.floor(Math.random() * 256);
+        var blue = Math.floor(Math.random() * 256);
+
+        // Construct the RGB color string
+        var color = "rgb(" + red + ", " + green + ", " + blue + ")";
+
+        return color;
+      }
       //Call the calculations for the site
       start(
         props.filterParams.startHour,
@@ -50,7 +62,7 @@ export default {
             props.filterParams.startMonth - 1,
             props.filterParams.endMonth
           ),
-          backgroundColor: "#718096",
+          backgroundColor: generateRandomColor(),
           borderColor: "#333333",
           borderRadius: 10,
         })
