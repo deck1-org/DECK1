@@ -30,9 +30,12 @@ export default {
   name: "WeatherDownTime",
   data() {
     return {
-      ids: [1],
+      ids: [],
       chartKey: false,
     };
+  },
+  mounted(){
+    this.ids.push(1);
   },
   methods: {
     addGraph() {

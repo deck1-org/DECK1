@@ -53,7 +53,6 @@
         latitude: props.location.latitude,
         longitude: props.location.longitude,
         limit: props.location.limit,
-        weatherData: weatherdata,
         isDataRegistered: false,
       };
     },

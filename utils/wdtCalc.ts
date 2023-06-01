@@ -49,7 +49,7 @@ export function start(
           Number(element.Hour) >= timeRangeStart &&
           Number(element.Hour) <= timeRangeEnd
         ) {
-          //evaluate hourly wdt
+          //evaluate hour wdt
           evaluateHourDay(asset, element, false);
         }
       } else {
@@ -69,7 +69,7 @@ export function start(
       }
       //if month changes -> evaluate
       if (
-        current_month != Number(element.Month) || // after || is only necessary if there's only one year of data
+        current_month != Number(element.Month) ||
         (Number(element.Month) === 12 &&
           Number(element.Day) === 31 &&
           Number(element.Hour) === timeRangeEnd)
@@ -99,7 +99,7 @@ export function start(
 }
 function evaluateHourDay(asset: any, element: any, newDay: boolean) {
   if (!newDay) {
-    if (asset) {
+    if (asset) { //If it's an asset, not the site itself
     if (asset.category === "Vessel") {
     hoursAsset.push(
       parseFloat(element.Sign[" wave height (Hs)"]) > asset.hs
@@ -117,7 +117,7 @@ function evaluateHourDay(asset: any, element: any, newDay: boolean) {
       hoursAsset.push(parseFloat(element["Wind speed"]) > conf_site_limit ? 1 : 0);
     }
     
-  } else {
+  } else { //if it's the site we're evaluating
     daysAsset.push(
       hoursAsset.filter((num) => num === 1).length / hoursAsset.length >=
         threshold
