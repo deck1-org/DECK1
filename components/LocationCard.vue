@@ -37,7 +37,6 @@
   </template>
   
   <script>
-  import weatherdata from '@/static/SKRD-ROCK-weather.json'
   import { useWeatherdataStore } from "~/stores/WeatherdataStore";
 
   export default {

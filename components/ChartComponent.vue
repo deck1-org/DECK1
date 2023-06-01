@@ -50,7 +50,7 @@ export default {
             props.filterParams.startMonth - 1,
             props.filterParams.endMonth
           ),
-          backgroundColor: "#718096 ",
+          backgroundColor: "#718096",
           borderColor: "#333333",
           borderRadius: 10,
         })
