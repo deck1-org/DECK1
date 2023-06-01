@@ -1,25 +1,30 @@
 import { defineStore } from "pinia";
-import all_data from "@/assets/one_year.json";
 
 export const useWeatherStore = defineStore("WeatherStore", {
   state: () => {
-    const weatherData = ref(all_data);
-    const ctvSmallData = ref<Number[]>();
-    const ctvLargeData = ref<Number[]>();
-    const sovData = ref<Number[]>();
-    const siteData = ref<Number[]>();
-    const heliData = ref<Number[]>();
+    const assetsWdt: any = {
+      
+    }
+    const labels = ref<String[]>([
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ]);
 
     return {
-      weatherData,
-      ctvSmallData,
-      ctvLargeData,
-      sovData,
-      siteData,
-      heliData,
+      assetsWdt,
+      labels,
     };
   },
+  actions: {
+  },
 });
-
-// config limits should be stored in the FilterStore
-// functions should be stored in relevent component

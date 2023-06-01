@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-lg mt-5 p-5 cursor-pointer text-white bg-transparent hover:text-black hover:white-gradient transition duration-300 ease-in-out"
+    class="sidebar-item text-lg mt-5 p-5 cursor-pointer bg-transparent hover:text-gray-100 transition duration-300 ease-in-out"
   >
     <NuxtLink :to="path">
       <a>{{ text }}</a>

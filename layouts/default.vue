@@ -1,9 +1,9 @@
 <template>
   <div class="flex">
-    <div class="w-1/6">
+    <div class="sidebar-container p-5 h-screen">
       <Sidebar />
     </div>
-    <div class="w-5/6 p-5">
+    <div class="main-content py-5 pr-5 h-min">
       <slot />
     </div>
   </div>
