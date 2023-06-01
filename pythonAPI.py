@@ -5,7 +5,6 @@ appFlask = Flask(__name__)
 
 @appFlask.route("/data/<c1>/<c2>/<c3>/<c4>/<name>", methods = ['GET'])
 def getData(c1, c2, c3, c4, name):
-	write_log(name + ": " + c1 + ", " + c2 + ", " + c3 + ", " + c4 + ", " + "\n")
 	result = cds_api_fetcher.retrieve(c1, c2, c3, c4, name)
 	return result[0], result[1]
 

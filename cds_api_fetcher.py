@@ -4,13 +4,9 @@
 import cdsapi, json
 
 c = cdsapi.Client()
-coords = [55.69, 12.59, 55.68, 12.6]
-
 
 def retrieve(c1, c2, c3, c4, name):
     name = name + ".nc"
-    # return "OK", 200
-
     try:
         result = c.retrieve(
             'reanalysis-era5-single-levels',
@@ -53,10 +49,7 @@ def retrieve(c1, c2, c3, c4, name):
                     '100m_u_component_of_wind', '100m_v_component_of_wind', 'cloud_base_height',
                     'significant_height_of_combined_wind_waves_and_swell', 'total_cloud_cover',
                 ]
-
             }, name)
-
-
         return "OK", 200
 
     except Exception as e:
