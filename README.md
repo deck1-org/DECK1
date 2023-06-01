@@ -56,8 +56,8 @@ key: <api_key>
 4. Install the CDS API client by running the following command in a Command Prompt window:
 
 ```bash
-pip install cdsapi # for Python 2.7
 pip3 install cdsapi # for Python 3
+pip3 install flask
 ```
 
 5. Once the CDS API client is installed, it can be used to request data from the datasets listed in the CDS and ADS catalogues. It is necessary to agree to the Terms of Use of every datasets that you intend to download. Attached to each dataset download form, the "Show API request" button displays the python code to be used.
